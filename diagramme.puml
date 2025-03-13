@@ -1,0 +1,98 @@
+@startuml
+
+class BestioleFactory {
+  + CreerBestiole(type:String):Bestiole
+}
+
+class Bestiole {
+  + SeDeplacer()
+  + Percussion()
+  + Naissance()
+  + mort()
+  + clonage()
+}
+
+class Aquarium {
+ +AjouterBestiole()
+ +Maj()
+}
+
+class Sujet {
+    +AjouterObservateur(Observer o)
+    +SupprimerObservateur(Observer o)
+    +Notifier()
+}
+
+class Observer {
+  +Maj()
+}
+
+class BestioleOreille {
+    -Distance : Float
+    +Entendre()
+}
+
+class BestioleNageoire {
+    -Vitesse Float  
+    +Acceler()
+}
+
+class BestioleCamouflage {
+  - Invisibilité : Float
+  + Camoufler()
+}
+
+class BestioleCarapace {
+  - Resistance : Float
+  + Encaisser()
+}
+
+class BestioleYeux {
+  - Distance : Float
+  + Voir()
+}
+
+class IComportement {
+  + Deplacer()
+}
+
+class Grégaire {
+
+}
+
+class Peureuse{
+
+}
+
+class Kamikaze{
+
+}
+
+class Prévoyant{
+
+}
+
+class Multi{
+
+}
+
+BestioleFactory --> Bestiole : créer
+Bestiole ..> BestioleOreille
+Bestiole ..> BestioleNageoire
+Bestiole ..> BestioleCamouflage
+Bestiole ..> BestioleCarapace
+Bestiole ..> BestioleYeux
+Bestiole --> Observer: implemente
+Bestiole ..> IComportement
+
+IComportement --> Grégaire: implemente
+IComportement --> Peureuse: implemente
+IComportement --> Kamikaze: implemente
+IComportement --> Prévoyant: implemente
+IComportement --> Multi: implemente
+
+Aquarium --* "many" Bestiole : contient
+Aquarium --> Sujet : implemente
+Sujet ..> Observer : notifie
+
+@enduml
