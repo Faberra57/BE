@@ -24,7 +24,7 @@ class Bestiole {
 class Aquarium {
  + longueur : int
  + largeur : int
- + listBestiole : vector<Bestiole>
+ + listBestiole : vector<IBestiole>
 
  +AjouterBestiole()
  +eliminerBestiole(Bestiole)
@@ -37,6 +37,7 @@ class BestioleOreille {
     - cap_detection_o_max : float
     - cap_detection_o_min : float
     + Entendre()
+
 }
 
 class BestioleNageoire {  
@@ -45,13 +46,15 @@ class BestioleNageoire {
 }
 
 class BestioleCamouflage {
-  - Invisibilité : Float
-  + Camoufler()
+  - phi_min : double
+  - phi_max : double
+  + Camoufler(phi_min,phi_max)
 }
 
 class BestioleCarapace {
-  - Resistance : Float
-  + Encaisser()
+  - eta_max : double
+  - omega_max : double
+  + Encaisser(eta_max,omega_max)
 }
 
 class BestioleYeux {
@@ -115,7 +118,8 @@ IComportement --> Prévoyant: implemente
 IComportement --> Multi: implemente
 Bestiole --> IBestiole
 
-Aquarium --* "many" Bestiole : contient
+
+Aquarium --* "many" IBestiole : contient
 DécorateurBestiole --o "many" IBestiole : contient
 
 @enduml
