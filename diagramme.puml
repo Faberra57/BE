@@ -1,88 +1,114 @@
-@startuml
+@startuml dd
 
 class BestioleFactory {
+  + liste_taux : map<string : double>
+
   + CreerBestiole(type:String):Bestiole
 }
 
 class Bestiole {
-  + SeDeplacer()
-  + Percussion()
-  + Naissance()
-  + mort()
-  + clonage()
+    + id : int
+    + vitesse : double
+    + position_x : double
+    + position_y : double
+    + orientation : double
+    + taille : double
+    + age : int
+    + age_limite : int
+    + Naissance()
+    + mort()
+    + clonage()
+    + contextComportement : IComportement
 }
 
 class Aquarium {
+ + longueur : int
+ + largeur : int
+ + listBestiole : vector<IBestiole>
+
  +AjouterBestiole()
+ +eliminerBestiole(Bestiole)
  +Maj()
 }
 
-class Sujet {
-    +AjouterObservateur(Observer o)
-    +SupprimerObservateur(Observer o)
-    +Notifier()
-}
-
-class Observer {
-  +Maj()
-}
-
 class BestioleOreille {
-    -Distance : Float
-    +Entendre()
+    - deltamin : float
+    - deltamax : float
+    - cap_detection_o_max : float
+    - cap_detection_o_min : float
+    + Entendre()
+
 }
 
-class BestioleNageoire {
-    -Vitesse Float  
-    +Acceler()
+class BestioleNageoire {  
+    - boost_max : float
+    + Accelerer(vitesse v,boost_max) : void
 }
 
 class BestioleCamouflage {
-  - Invisibilité : Float
-  + Camoufler()
+  - phi_min : double
+  - phi_max : double
+  + Camoufler(phi_min,phi_max)
 }
 
 class BestioleCarapace {
-  - Resistance : Float
-  + Encaisser()
+  - eta_max : double
+  - omega_max : double
+  + Encaisser(eta_max,omega_max)
 }
 
 class BestioleYeux {
-  - Distance : Float
+  - alphamin : Float
+  - alphamax : Float
+  - dmin : Float
+  - dmax : float
+  - cap_detection_y_max : Float
+  - cap_detection_y_min : Float
   + Voir()
 }
 
 class IComportement {
-  + Deplacer()
+  + Deplacer(Bestiole)
 }
 
 class Grégaire {
+    -Deplacer(Bestiole) : void #ajustDirection
 
 }
 
 class Peureuse{
+    -Deplacer(Bestiole) : void #def seuil+fuir
 
 }
 
 class Kamikaze{
-
+    -Deplacer(Bestiole) : void #percuterKamikaze
 }
 
 class Prévoyant{
+    -Deplacer(Bestiole) : void #ajuster trajectoire
 
+}
+
+Interface IBestiole{
+  +Deplacer()
+  +Percussion()
+}
+
+class DécorateurBestiole{
+  - Bestiole : IBestiole 
 }
 
 class Multi{
-
+    -adoptComportement(Bestiole) : void ?
 }
 
 BestioleFactory --> Bestiole : créer
-Bestiole ..> BestioleOreille
-Bestiole ..> BestioleNageoire
-Bestiole ..> BestioleCamouflage
-Bestiole ..> BestioleCarapace
-Bestiole ..> BestioleYeux
-Bestiole --> Observer: implemente
+DécorateurBestiole ..> BestioleOreille
+DécorateurBestiole ..> BestioleNageoire
+DécorateurBestiole ..> BestioleCamouflage
+DécorateurBestiole ..> BestioleCarapace
+DécorateurBestiole ..> BestioleYeux
 Bestiole ..> IComportement
 
 IComportement --> Grégaire: implemente
@@ -90,9 +116,10 @@ IComportement --> Peureuse: implemente
 IComportement --> Kamikaze: implemente
 IComportement --> Prévoyant: implemente
 IComportement --> Multi: implemente
+Bestiole --> IBestiole
 
-Aquarium --* "many" Bestiole : contient
-Aquarium --> Sujet : implemente
-Sujet ..> Observer : notifie
+
+Aquarium --* "many" IBestiole : contient
+DécorateurBestiole --o "many" IBestiole : contient
 
 @enduml
