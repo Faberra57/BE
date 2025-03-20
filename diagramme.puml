@@ -15,22 +15,18 @@ class Bestiole {
     + age : int
     + age_limite : int
     + estVivant : bool
-    + possedeOreille : bool
-    + possedeNageoire : bool
-    + possedeCamouflage : bool 
-    + possedeCarapace : bool 
-    + possedeBestiole : bool
-    + Bestiole()
+    + resistance : double
+    + detectabilité : double
     + mort(condition)
     + clonage()
     + contextComportement : IComportement
+    + Deplacer()
+    + Percussion()
 }
 
 class Aquarium {
  + longueur : int
  + largeur : int
- + bestioleFactory : BestioleFactory
- + listBestiole : vector<IBestiole>
 
  +AjouterBestiole()
  +eliminerBestiole(Bestiole)
@@ -42,25 +38,25 @@ class BestioleOreille {
     - deltamax : float
     - cap_detection_o_max : float
     - cap_detection_o_min : float
-    + Entendre()
+    + Entendre(BestioleEnv,Aquarium) : Vector<Bool> 
 
 }
 
 class BestioleNageoire {  
     - boost_max : float
-    + Accelerer(vitesse v,boost_max) : void
+    + setVitesse(vitesse v,boost_max) : void
 }
 
 class BestioleCamouflage {
   - phi_min : double
   - phi_max : double
-  + Camoufler(phi_min,phi_max)
+  + setDetectabilité(phi_min,phi_max) : void
 }
 
 class BestioleCarapace {
   - eta_max : double
   - omega_max : double
-  + Encaisser(eta_max,omega_max)
+  + setResistance(eta_max,omega_max) : void
 }
 
 class BestioleYeux {
@@ -70,7 +66,7 @@ class BestioleYeux {
   - dmax : float
   - cap_detection_y_max : Float
   - cap_detection_y_min : Float
-  + Voir()
+  + Voir(BestioleEnv,Aquarium) : Vector<Bool>
 }
 
 class IComportement {
@@ -96,36 +92,29 @@ class Prévoyant{
 
 }
 
-Interface IBestiole{
-  +Deplacer()
-  +Percussion()
-}
-
-class DécorateurBestiole{
-  - Bestiole : IBestiole 
-}
 
 class Multi{
     -adoptComportement(Bestiole) : void ?
 }
 
 BestioleFactory --> Bestiole : créer
-DécorateurBestiole <|.. BestioleOreille
-DécorateurBestiole <|.. BestioleNageoire
-DécorateurBestiole <|.. BestioleCamouflage
-DécorateurBestiole <|.. BestioleCarapace
-DécorateurBestiole <|.. BestioleYeux
-Bestiole ..> IComportement
+Bestiole <-- BestioleOreille
+Bestiole <-- BestioleNageoire
+Bestiole <-- BestioleCamouflage
+Bestiole <-- BestioleCarapace
+Bestiole <-- BestioleYeux
+
 
 IComportement <|.. Grégaire
 IComportement <|.. Peureuse
 IComportement <|.. Kamikaze
 IComportement <|.. Prévoyant
 IComportement <|.. Multi
-Bestiole --|> IBestiole
+Bestiole *-- IComportement
 
 
-Aquarium --* "many" IBestiole : contient
-DécorateurBestiole --* "many" IBestiole : contient
+Aquarium --* "many" Bestiole : contient
+
+Aquarium -- BestioleFactory
 
 @enduml
