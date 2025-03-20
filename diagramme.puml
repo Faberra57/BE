@@ -2,8 +2,7 @@
 
 class BestioleFactory {
   + liste_taux : map<string : double>
-
-  + CreerBestiole(type:String):Bestiole
+  + CreerBestiole():Bestiole
 }
 
 class Bestiole {
@@ -15,8 +14,14 @@ class Bestiole {
     + taille : double
     + age : int
     + age_limite : int
-    + Naissance()
-    + mort()
+    + estVivant : bool
+    + possedeOreille : bool
+    + possedeNageoire : bool
+    + possedeCamouflage : bool 
+    + possedeCarapace : bool 
+    + possedeBestiole : bool
+    + Bestiole()
+    + mort(condition)
     + clonage()
     + contextComportement : IComportement
 }
@@ -24,6 +29,7 @@ class Bestiole {
 class Aquarium {
  + longueur : int
  + largeur : int
+ + bestioleFactory : BestioleFactory
  + listBestiole : vector<IBestiole>
 
  +AjouterBestiole()
@@ -104,22 +110,22 @@ class Multi{
 }
 
 BestioleFactory --> Bestiole : créer
-DécorateurBestiole ..> BestioleOreille
-DécorateurBestiole ..> BestioleNageoire
-DécorateurBestiole ..> BestioleCamouflage
-DécorateurBestiole ..> BestioleCarapace
-DécorateurBestiole ..> BestioleYeux
+DécorateurBestiole <|.. BestioleOreille
+DécorateurBestiole <|.. BestioleNageoire
+DécorateurBestiole <|.. BestioleCamouflage
+DécorateurBestiole <|.. BestioleCarapace
+DécorateurBestiole <|.. BestioleYeux
 Bestiole ..> IComportement
 
-IComportement --> Grégaire: implemente
-IComportement --> Peureuse: implemente
-IComportement --> Kamikaze: implemente
-IComportement --> Prévoyant: implemente
-IComportement --> Multi: implemente
-Bestiole --> IBestiole
+IComportement <|.. Grégaire
+IComportement <|.. Peureuse
+IComportement <|.. Kamikaze
+IComportement <|.. Prévoyant
+IComportement <|.. Multi
+Bestiole --|> IBestiole
 
 
 Aquarium --* "many" IBestiole : contient
-DécorateurBestiole --o "many" IBestiole : contient
+DécorateurBestiole --* "many" IBestiole : contient
 
 @enduml
