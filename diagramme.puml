@@ -19,12 +19,11 @@ class Bestiole {
     + detectabilité : double
     + mort(condition)
     + clonage()
-    + contextComportement : IComportement
     + Deplacer()
     + Percussion()
 }
 
-class Aquarium {
+class Millieu {
  + longueur : int
  + largeur : int
 
@@ -38,25 +37,34 @@ class BestioleOreille {
     - deltamax : float
     - cap_detection_o_max : float
     - cap_detection_o_min : float
-    + Entendre(BestioleEnv,Aquarium) : Vector<Bool> 
+    + Detecter(Aquarium) : Vector<Bool> 
 
 }
 
+Interface Accessoire {
+  setParam() : void
+}
+
+Interface Capteur {
+  Detecter() : vector<Bool>
+}
+
+
 class BestioleNageoire {  
     - boost_max : float
-    + setVitesse(vitesse v,boost_max) : void
+    + setParam(vitesse v,boost_max) : void #setVit
 }
 
 class BestioleCamouflage {
   - phi_min : double
   - phi_max : double
-  + setDetectabilité(phi_min,phi_max) : void
+  + setParam(phi_min,phi_max) : void #setDetect
 }
 
 class BestioleCarapace {
   - eta_max : double
   - omega_max : double
-  + setResistance(eta_max,omega_max) : void
+  + setParam(eta_max,omega_max) : void #setResist
 }
 
 class BestioleYeux {
@@ -66,7 +74,7 @@ class BestioleYeux {
   - dmax : float
   - cap_detection_y_max : Float
   - cap_detection_y_min : Float
-  + Voir(BestioleEnv,Aquarium) : Vector<Bool>
+  + Detecter(Aquarium) : Vector<Bool>
 }
 
 class IComportement {
@@ -98,12 +106,10 @@ class Multi{
 }
 
 BestioleFactory --> Bestiole : créer
-Bestiole <-- BestioleOreille
-Bestiole <-- BestioleNageoire
-Bestiole <-- BestioleCamouflage
-Bestiole <-- BestioleCarapace
-Bestiole <-- BestioleYeux
 
+Capteur *-- Bestiole
+Capteur<|..BestioleOreille
+Capteur<|..BestioleYeux
 
 IComportement <|.. Grégaire
 IComportement <|.. Peureuse
@@ -113,8 +119,15 @@ IComportement <|.. Multi
 Bestiole *-- IComportement
 
 
-Aquarium --* "many" Bestiole : contient
 
-Aquarium -- BestioleFactory
+Accessoire <|..BestioleNageoire
+Accessoire <|..BestioleCarapace
+Accessoire <|..BestioleCamouflage
+Accessoire *-- Bestiole
+
+
+Millieu --* "many" Bestiole : contient
+
+Millieu -- BestioleFactory
 
 @enduml
