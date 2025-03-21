@@ -1,6 +1,7 @@
 #include "Peureuse.h"
 #include <iostream>
 #include <cmath>
+#include limits
 
 Peureuse::Peureuse(){}
 
@@ -10,9 +11,9 @@ void Peureuse::Deplacer(Bestiole& B1,Milieu milieu,std::vector<Bool> detection){
     int nb_bestiole_proches = 0;
     double Fx = 0;
     double Fy = 0;
-    for (std::size_t i = 0; i< dectection.size();i++){
+    for (std::size_t i = 0; i<dectection.size();i++){
         if (detection[i]){
-            nb_bestiole_proches++;
+            nb_bestioles_proches++;
             Fx = Fx + (B1.position_x - detection[i].position_x);
             Fy = Fy + (B1.position_y - detection[i].position_y);
         }
