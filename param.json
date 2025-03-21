@@ -13,5 +13,12 @@
         "delta_max": 100,
         "gamma_min": 0.1,
         "gamma_max": 1
-    }
+    },
+"Kamikaze": {
+    "multiplicateur_vit_kamikaze" : 4
+},
+"Peureuse" : {
+    "multiplicateur_vit_peureuse" : 4 , 
+    "seuil" : 10  
+}
 }

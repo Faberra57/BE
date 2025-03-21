@@ -2,13 +2,26 @@
 #include <iostream>
 #include <cmath>
 
+#include <fstream>
+#include "json.hpp"
+
 Peureuse::Peureuse(){}
 
 
 void Peureuse::Deplacer(Bestiole& B1,Milieu& milieu){
     std::vector<Bool> best_detectés = B1.detection(milieu);
     std::vector<Bestiole> best_aq = milieu.getVectBest();
-    double seuil = 10; // seuil à définir dans le JSON, sert à établir le nombre maximal de bestioles environnates détécté au bout duquel la la bestiole Peureuse fuit
+
+    std::ifstream inputFile("param.json");
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Erreur lors de l'ouverture du fichier!" << std::endl;
+        return;
+    }
+    nlohmann::json j;
+    inputFile >> j;
+
+    double seuil = j["Peureuse"]["seuil"]; // seuil à définir dans le JSON, sert à établir le nombre maximal de bestioles environnates détécté au bout duquel la la bestiole Peureuse fuit
     int nb_bestiole_proches = 0;
     double Fx = 0;
     double Fy = 0;
@@ -24,7 +37,7 @@ void Peureuse::Deplacer(Bestiole& B1,Milieu& milieu){
     if (nb_bestiole_proches>seuil){
         if (Fx != 0 || Fy!= 0 ){
             B1.setOrientation(std::atan2(Fy,Fx) * 180 / M_PI + 180);
-            B1.setVitesse(B1.getVitesse() * multiplicateur_vit_peureuse); //multiplicateur à définir dans le JSON
+            B1.setVitesse(B1.getVitesse() * j["Peureuse"]["multiplicateur_vit_peureuse"]); //multiplicateur à définir dans le JSON
     }
 }
 }

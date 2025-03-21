@@ -2,9 +2,22 @@
 #include <iostream>
 #include <cmath>
 
+#include <fstream>
+#include "json.hpp"
+
 void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
     std::vector<Bool> best_detectés = B1.detection(milieu); //définir la méthode detecter qui renvoi la détéction via des bool de toutes les bestioles de l'aquarium
     std::vector<Bestiole> best_aq = milieu.getVectBest();
+
+    std::ifstream inputFile("param.json");
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Erreur lors de l'ouverture du fichier!" << std::endl;
+        return;
+    }
+    nlohmann::json j;
+    inputFile >> j;
+
     double dist_min = std::numeric_limits<double>::infinity();
     int position_bestiole_proche = 0;
     for (std::size_t i = 0; i< best_detectés.size();i++){
@@ -23,7 +36,7 @@ void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
 
     if (dx != 0 || dy!= 0 ){
         B1.setOrientation(std::atan2(dy,dx) * 180 / M_PI);
-        B1.setVitesse(B1.getVitesse());
+        B1.setVitesse(B1.getVitesse()*j["Kamikaze"]["multiplicateur_vit_kamikaze"]);
     }
 }
 
