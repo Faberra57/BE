@@ -6,7 +6,7 @@
 
 class Kamikaze{
     public :
-        void Deplacer(Bestiole Bestiole,Milieu milieu,std::vector<Bool> detection);
+        void Deplacer(Bestiole& Bestiole,Milieu& milieu);
 };
 
 #endif
