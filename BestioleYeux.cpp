@@ -3,16 +3,31 @@
 #include "Bestiole.h"
 #include <cmath>
 
+#include <fstream>
+#include "json.hpp"
+
 using namespace std;
 
 /*
 J'utilise des angles en radians pour les calculs
 */
 
-BestioleYeux::BestioleYeux(const double delta_min,const double delta_max,
-    const double alpha_min,const double alpha_max,
-    const double gamma_min,const double gamma_max,const Bestiole& bestiole) : owner(bestiole)
+BestioleYeux::BestioleYeux(const Bestiole& bestiole) : owner(bestiole)
 {
+    std::ifstream inputFile("param.json");
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Erreur lors de l'ouverture du fichier!" << std::endl;
+        return;
+    }
+    nlohmann::json j;
+    inputFile >> j;
+    double alpha_min = j["Yeux"]["alpha_min"];
+    double alpha_max = j["Yeux"]["alpha_max"];
+    double delta_min = j["Yeux"]["delta_min"];
+    double delta_max = j["Yeux"]["delta_max"];
+    double gamma_min = j["Yeux"]["gamma_min"];
+    double gamma_max = j["Yeux"]["gamma_max"];
     alpha = (alpha_max - alpha_min) * ((double)rand() / RAND_MAX) + alpha_min;
     delta = (delta_max - delta_min) * ((double)rand() / RAND_MAX) + delta_min;
     gamma = (gamma_max - gamma_min) * ((double)rand() / RAND_MAX) + gamma_min;

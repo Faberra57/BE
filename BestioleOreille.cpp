@@ -2,6 +2,9 @@
 #include "Milieu.h"
 #include "Bestiole.h"
 
+#include <fstream>
+#include "json.hpp"
+
 using namespace std;
 
 /*
@@ -10,9 +13,20 @@ delta_min et delta_max et gamma_min et gamma_max.
 
 */
 
-BestioleOreille::BestioleOreille(const double delta_min,const double delta_max,
-    const double gamma_min,const double gamma_max,const Bestiole& bestiole) : owner(bestiole)
+BestioleOreille::BestioleOreille(const Bestiole& bestiole) : owner(bestiole)
 {
+    std::ifstream inputFile("param.json");
+    if (!inputFile.is_open())
+    {
+        std::cerr << "Erreur lors de l'ouverture du fichier!" << std::endl;
+        return;
+    }
+    nlohmann::json j;
+    inputFile >> j;
+    double delta_min = j["Oreille"]["delta_min"];
+    double delta_max = j["Oreille"]["delta_max"];
+    double gamma_min = j["Oreille"]["gamma_min"];
+    double gamma_max = j["Oreille"]["gamma_max"];
     delta = (delta_max - delta_min) * ((double)rand() / RAND_MAX) + delta_min;
     gamma = (gamma_max - gamma_min) * ((double)rand() / RAND_MAX) + gamma_min;
 }
