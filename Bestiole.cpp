@@ -8,7 +8,6 @@
 
 const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
-const double      Bestiole::LIMITE_VUE = 30.;
 
 int               Bestiole::next = 0;
 
@@ -16,9 +15,9 @@ int               Bestiole::next = 0;
 Bestiole::Bestiole( void )
 {
 
-   identite = ++next;
+   id = ++next;
 
-   cout << "const Bestiole (" << identite << ") par defaut" << endl;
+   cout << "const Bestiole (" << id << ") par defaut" << endl;
 
    x = y = 0;
    cumulX = cumulY = 0.;
@@ -36,9 +35,9 @@ Bestiole::Bestiole( void )
 Bestiole::Bestiole( const Bestiole & b )
 {
 
-   identite = ++next;
+   id = ++next;
 
-   cout << "const Bestiole (" << identite << ") par copie" << endl;
+   cout << "const Bestiole (" << id << ") par copie" << endl;
 
    x = b.x;
    y = b.y;
@@ -130,18 +129,6 @@ void Bestiole::draw( UImg & support )
 bool operator==( const Bestiole & b1, const Bestiole & b2 )
 {
 
-   return ( b1.identite == b2.identite );
-
-}
-
-
-bool Bestiole::jeTeVois( const Bestiole & b ) const
-{
-
-   double         dist;
-
-
-   dist = std::sqrt( (x-b.x)*(x-b.x) + (y-b.y)*(y-b.y) );
-   return ( dist <= LIMITE_VUE );
+   return ( b1.id == b2.id );
 
 }
