@@ -1,0 +1,9 @@
+{
+    "name": "Simulation",
+    "version": 1.0,
+    "enabled": true,
+    "parameters": {
+        "width": 1024,
+        "height": 768
+    }
+}
