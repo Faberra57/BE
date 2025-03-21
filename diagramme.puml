@@ -21,6 +21,7 @@ class Bestiole {
     + clonage()
     + Deplacer()
     + Percussion()
+    + Detection()
 }
 
 class Millieu {
@@ -33,11 +34,9 @@ class Millieu {
 }
 
 class BestioleOreille {
-    - deltamin : float
-    - deltamax : float
-    - cap_detection_o_max : float
-    - cap_detection_o_min : float
-    + Detecter(Aquarium) : Vector<Bool> 
+    - delta : float
+    - gamme : float
+    + Detecter(Millieu) : Vector<Bool> 
 
 }
 
@@ -46,7 +45,7 @@ Interface Accessoire {
 }
 
 Interface Capteur {
-  Detecter() : vector<Bool>
+  Detecter(Millieu) : vector<Bool>
 }
 
 
@@ -68,13 +67,10 @@ class BestioleCarapace {
 }
 
 class BestioleYeux {
-  - alphamin : Float
-  - alphamax : Float
-  - dmin : Float
-  - dmax : float
-  - cap_detection_y_max : Float
-  - cap_detection_y_min : Float
-  + Detecter(Aquarium) : Vector<Bool>
+  - alpha : Float
+  - delta : Float
+  - gamma : float
+  + Detecter(Millieu) : Vector<Bool>
 }
 
 class IComportement {
