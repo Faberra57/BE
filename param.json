@@ -1,9 +1,15 @@
 {
-    "name": "Simulation",
-    "version": 1.0,
-    "enabled": true,
-    "parameters": {
-        "width": 1024,
-        "height": 768
-    }
+
+    "delta_max_yeux" : 100,
+    "delta_min_yeux" : 10,
+    "alpha_max" : 1.57,
+    "alpha_min" : 0.19625,
+    "gamma_max_yeux" : 1,
+    "gamma_min_yeux" : 0.1,
+
+    "delta_max_oreille" : 100,
+    "delta_min_oreille" : 10,
+    "gamma_max_oreille" : 1,
+    "gamma_min_oreille" : 0.1
+    
 }
