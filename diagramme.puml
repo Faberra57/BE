@@ -8,8 +8,8 @@ class BestioleFactory {
 class Bestiole {
     + id : int
     + vitesse : double
-    + position_x : double
-    + position_y : double
+    + x : double
+    + y : double
     + orientation : double
     + taille : double
     + age : int
@@ -19,21 +19,22 @@ class Bestiole {
     + detectabilité : double
     + mort(condition)
     + clonage()
-    + Deplacer()
     + Percussion()
-    + Detection()
+    + Detection(Milieu)
+    + Bouge()
+    + Action(Milieu)
 }
 
 class Millieu {
  + longueur : int
  + largeur : int
-
- +AjouterBestiole()
+ +AddMember()
  +eliminerBestiole(Bestiole)
- +Maj()
+ +Step()
 }
 
 class BestioleOreille {
+    - owner : Bestiole
     - delta : float
     - gamme : float
     + Detecter(Millieu) : Vector<Bool> 
@@ -49,24 +50,27 @@ Interface Capteur {
 }
 
 
-class BestioleNageoire {  
-    - boost_max : float
-    + setParam(vitesse v,boost_max) : void #setVit
+class BestioleNageoire {
+    - owner : Bestiole  
+    - boost : float
+    + setParam() : void #setVit
 }
 
 class BestioleCamouflage {
-  - phi_min : double
-  - phi_max : double
-  + setParam(phi_min,phi_max) : void #setDetect
+  - owner : Bestiole
+  - phi: double
+  + setParam() : void #setDetect
 }
 
 class BestioleCarapace {
-  - eta_max : double
-  - omega_max : double
-  + setParam(eta_max,omega_max) : void #setResist
+  - owner : Bestiole
+  - eta : double
+  - omega : double
+  + setParam() : void #setResist
 }
 
 class BestioleYeux {
+  - owner : Bestiole
   - alpha : Float
   - delta : Float
   - gamma : float

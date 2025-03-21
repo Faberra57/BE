@@ -23,7 +23,7 @@ private :
    static int              next;
 
 private :
-   int               identite;
+   int               id;
    int               x, y;
    double            cumulX, cumulY;
    double            orientation;
@@ -41,9 +41,6 @@ public :                                           // Forme canonique :
                                                    // Operateur d'affectation binaire par defaut
    void action( Milieu & monMilieu );
    void draw( UImg & support );
-
-   bool jeTeVois( const Bestiole & b ) const;
-
    void initCoords( int xLim, int yLim );
 
    friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
