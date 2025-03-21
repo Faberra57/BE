@@ -1,134 +1,42 @@
-#include "Bestiole.h"
-
-#include "Milieu.h"
-
-#include <cstdlib>
+#include "Bestiole.hpp"
 #include <cmath>
+#include <iostream>
 
+Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect)
+    : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
+      age_limite(a_lim), estVivant(vivant), resistance(res), detectabilite(detect) {}
 
-const double      Bestiole::AFF_SIZE = 8.;
-const double      Bestiole::MAX_VITESSE = 10.;
-
-int               Bestiole::next = 0;
-
-
-Bestiole::Bestiole( void )
-{
-
-   id = ++next;
-
-   cout << "const Bestiole (" << id << ") par defaut" << endl;
-
-   x = y = 0;
-   cumulX = cumulY = 0.;
-   orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
-   vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
-
-   couleur = new T[ 3 ];
-   couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-   couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-
+void Bestiole::mort() {
+    if (age >= age_limite || resistance <= 0) {
+        estVivant = false;
+    }
 }
 
-
-Bestiole::Bestiole( const Bestiole & b )
-{
-
-   id = ++next;
-
-   cout << "const Bestiole (" << id << ") par copie" << endl;
-
-   x = b.x;
-   y = b.y;
-   cumulX = cumulY = 0.;
-   orientation = b.orientation;
-   vitesse = b.vitesse;
-   couleur = new T[ 3 ];
-   memcpy( couleur, b.couleur, 3*sizeof(T) );
-
+Bestiole* Bestiole::clonage() {
+    return new Bestiole(*this);
 }
 
-
-Bestiole::~Bestiole( void )
-{
-
-   delete[] couleur;
-
-   cout << "dest Bestiole" << endl;
-
+void virtual Bestiole::Deplacer() {
+    position_x += vitesse * cos(orientation);
+    position_y += vitesse * sin(orientation);
 }
 
+void Bestiole::Percussion(Bestiole* autre) {
+ 
 
-void Bestiole::initCoords( int xLim, int yLim )
-{
+    
+    if (std::abs(position_x - autre->position_x) < 1e-3 &
+        std::abs(position_y - autre->position_y) < 1e-3) {
 
-   x = rand() % xLim;
-   y = rand() % yLim;
+        std::cout << " Collision détectée entre Bestiole #" << id
+                  << " et Bestiole " << autre->id << std::endl;
 
-}
+        // réduction de résistance
+        resistance -= 10;
+        autre->resistance -= 10;
 
-
-void Bestiole::bouge( int xLim, int yLim )
-{
-
-   double         nx, ny;
-   double         dx = cos( orientation )*vitesse;
-   double         dy = -sin( orientation )*vitesse;
-   int            cx, cy;
-
-
-   cx = static_cast<int>( cumulX ); cumulX -= cx;
-   cy = static_cast<int>( cumulY ); cumulY -= cy;
-
-   nx = x + dx + cx;
-   ny = y + dy + cy;
-
-   if ( (nx < 0) || (nx > xLim - 1) ) {
-      orientation = M_PI - orientation;
-      cumulX = 0.;
-   }
-   else {
-      x = static_cast<int>( nx );
-      cumulX += nx - x;
-   }
-
-   if ( (ny < 0) || (ny > yLim - 1) ) {
-      orientation = -orientation;
-      cumulY = 0.;
-   }
-   else {
-      y = static_cast<int>( ny );
-      cumulY += ny - y;
-   }
-
-}
-
-
-void Bestiole::action( Milieu & monMilieu )
-{
-
-   bouge( monMilieu.getWidth(), monMilieu.getHeight() );
-
-}
-
-
-void Bestiole::draw( UImg & support )
-{
-
-   double         xt = x + cos( orientation )*AFF_SIZE/2.1;
-   double         yt = y - sin( orientation )*AFF_SIZE/2.1;
-
-
-   support.draw_ellipse( x, y, AFF_SIZE, AFF_SIZE/5., -orientation/M_PI*180., couleur );
-   support.draw_circle( xt, yt, AFF_SIZE/2., couleur );
-
-}
-
-
-bool operator==( const Bestiole & b1, const Bestiole & b2 )
-{
-
-   return ( b1.id == b2.id );
-
+        
+        
+     
+    }
 }

@@ -1,41 +1,27 @@
-#include "Milieu.h"
+#include "Milieu.hpp"
+#include <algorithm>
 
-#include <cstdlib>
-#include <ctime>
+Milieu::Milieu(int l, int w) : longueur(l), largeur(w) {}
 
-
-const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
-
-
-Milieu::Milieu( int _width, int _height ) : UImg( _width, _height, 1, 3 ),
-                                            width(_width), height(_height)
-{
-
-   cout << "const Milieu" << endl;
-
-   std::srand( time(NULL) );
-
+Milieu::~Milieu() {
+    for (auto b : bestioles) {
+        delete b;
+    }
 }
 
-
-Milieu::~Milieu( void )
-{
-
-   cout << "dest Milieu" << endl;
-
+void Milieu::AjouterBestiole(Bestiole* b) {
+    bestioles.push_back(b);
 }
 
+void Milieu::eliminerBestiole(Bestiole* b) {
+    bestioles.erase(std::remove(bestioles.begin(), bestioles.end(), b), bestioles.end());
+    delete b;
+}
 
-void Milieu::step( void )
-{
-
-   cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
-   for ( std::vector<Bestiole>::iterator it = listeBestioles.begin() ; it != listeBestioles.end() ; ++it )
-   {
-
-      it->action( *this );
-      it->draw( *this );
-
-   } // for
-
+void Milieu::Maj() {
+    for (auto b : bestioles) {
+        if (b->clonage() && b->Deplacer()) {
+            
+        }
+    }
 }

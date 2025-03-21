@@ -1,51 +1,28 @@
-#ifndef _BESTIOLES_H_
-#define _BESTIOLES_H_
+#ifndef BESTIOLE_H
+#define BESTIOLE_H
 
+class Bestiole {
+private:
+    int id;
+    double vitesse;
+    double position_x;
+    double position_y;
+    double orientation;
+    double taille;
+    int age;
+    int age_limite;
+    bool estVivant;
+    double resistance;
+    double detectabilite;
 
-#include "UImg.h"
+public:
+    Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect);
+    ~Bestiole() = default;
 
-#include <iostream>
-
-using namespace std;
-
-
-class Milieu;
-
-
-class Bestiole
-{
-
-private :
-   static const double     AFF_SIZE;
-   static const double     MAX_VITESSE;
-   static const double     LIMITE_VUE;
-
-   static int              next;
-
-private :
-   int               id;
-   int               x, y;
-   double            cumulX, cumulY;
-   double            orientation;
-   double            vitesse;
-
-   T               * couleur;
-
-private :
-   void bouge( int xLim, int yLim );
-
-public :                                           // Forme canonique :
-   Bestiole( void );                               // Constructeur par defaut
-   Bestiole( const Bestiole & b );                 // Constructeur de copies
-   ~Bestiole( void );                              // Destructeur
-                                                   // Operateur d'affectation binaire par defaut
-   void action( Milieu & monMilieu );
-   void draw( UImg & support );
-   void initCoords( int xLim, int yLim );
-
-   friend bool operator==( const Bestiole & b1, const Bestiole & b2 );
-
+    void mort();         
+    Bestiole* clonage();  
+    void Deplacer();     
+    void Percussion(Bestiole* autre);  
 };
 
-
-#endif
+#endif // 
