@@ -7,6 +7,7 @@ Peureuse::Peureuse(){}
 
 void Peureuse::Deplacer(Bestiole& B1,Milieu& milieu){
     std::vector<Bool> best_detectés = B1.detection(milieu);
+    std::vector<Bestiole> best_aq = milieu.getVectBest();
     double seuil = 10; // seuil à définir dans le JSON, sert à établir le nombre maximal de bestioles environnates détécté au bout duquel la la bestiole Peureuse fuit
     int nb_bestiole_proches = 0;
     double Fx = 0;
@@ -14,8 +15,8 @@ void Peureuse::Deplacer(Bestiole& B1,Milieu& milieu){
     for (std::size_t i = 0; i< best_detectés.size();i++){
         if (best_detectés[i]){
             nb_bestiole_proches++;
-            Fx = Fx + (B1.get_x() - best_detectés[i].get_x());
-            Fy = Fy + (B1.get_y() - best_detectés[i].get_y());
+            Fx = Fx + (B1.get_x() - best_aq[i].get_x());
+            Fy = Fy + (B1.get_y() - best_aq[i].get_y());
         }
     }
     Fx = Fx / nb_bestiole_proches;
