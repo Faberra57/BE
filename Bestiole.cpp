@@ -1,4 +1,4 @@
-#include "Bestiole.hpp"
+#include "Bestiole.h"
 #include <cmath>
 #include <iostream>
 
@@ -16,15 +16,12 @@ Bestiole* Bestiole::clonage() {
     return new Bestiole(*this);
 }
 
-void virtual Bestiole::Deplacer() {
+void Bestiole::Bouge() {
     position_x += vitesse * cos(orientation);
     position_y += vitesse * sin(orientation);
 }
 
 void Bestiole::Percussion(Bestiole* autre) {
- 
-
-    
     if (std::abs(position_x - autre->position_x) < 1e-3 &
         std::abs(position_y - autre->position_y) < 1e-3) {
 
@@ -34,9 +31,24 @@ void Bestiole::Percussion(Bestiole* autre) {
         // réduction de résistance
         resistance -= 10;
         autre->resistance -= 10;
-
-        
-        
-     
     }
+}
+
+double Bestiole::get_x(){
+    return (*this).position_x;
+}
+double Bestiole::get_y(){
+    return (*this).position_y;
+}
+double Bestiole::getVitesse(){
+    return (*this).vitesse;
+}
+double Bestiole::getOrientation(){
+    return (*this).orientation;
+}
+void Bestiole::setOrientation(double o){
+    (*this).orientation = o;
+}
+void Bestiole::setVitesse(double v){
+    (*this).vitesse = v;
 }

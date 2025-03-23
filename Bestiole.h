@@ -21,8 +21,15 @@ public:
 
     void mort();         
     Bestiole* clonage();  
-    void Deplacer();     
-    void Percussion(Bestiole* autre);  
+    void Bouge();     
+    void Percussion(Bestiole* autre);
+    double get_x();
+    double get_y();
+    double getOrientation();
+    double getVitesse();
+    void setOrientation(double o);
+    void setVitesse(double v);
+  
 };
 
 #endif // 
