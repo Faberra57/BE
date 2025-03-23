@@ -1,12 +1,12 @@
 #pragma once
-#include "Comportement.h"
+#include "IComportement.h"
 #include "Bestiole.h"
 #include "Milieu.h"
 
-class Prevoyant : public Comportement {
+class Prevoyant : public IComportement {
 public:
     Prevoyant();
     virtual ~Prevoyant();
 
-    void deplacer(Bestiole & b, Milieu & env) override;
+    void Deplacer(Bestiole & b, Milieu & env);
 };

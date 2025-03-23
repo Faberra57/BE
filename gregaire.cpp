@@ -1,4 +1,4 @@
-#include "Gregaire.h"
+#include "gregaire.h"
 #include "Bestiole.h"
 #include "Milieu.h"
 #include <vector>
@@ -6,9 +6,9 @@
 Gregaire::Gregaire() {}
 Gregaire::~Gregaire() {}
 
-void Gregaire::deplacer(Bestiole & b, Milieu & env) {
+void Gregaire::Deplacer(Bestiole & b, Milieu & env) {
     std::vector<Bestiole*> toutesB = env.getBestioles();
-    std::vector<bool> bestiolesDetectables = b.detection(env);
+    std::vector<bool> bestiolesDetectables = b.Detection(env);
 
     double sum_x = 0.0, sum_y = 0.0;
     int count = 0;

@@ -1,12 +1,12 @@
 #pragma once
-#include "Comportement.h"
+#include "IComportement.h"
 #include "Bestiole.h"
 #include "Milieu.h"
 
-class Gregaire : public Comportement {
+class Gregaire : public IComportement {
 public:
     Gregaire();
     virtual ~Gregaire();
 
-    void deplacer(Bestiole & b, Milieu & env) override;
+    void Deplacer(Bestiole & b, Milieu & env);
 };

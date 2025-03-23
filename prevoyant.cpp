@@ -1,4 +1,4 @@
-#include "Prevoyant.h"
+#include "prevoyant.h"
 #include "Bestiole.h"
 #include "Milieu.h"
 #include <vector>
@@ -7,16 +7,16 @@
 Prevoyant::Prevoyant() {}
 Prevoyant::~Prevoyant() {}
 
-void Prevoyant::deplacer(Bestiole & b, Milieu & env) {
+void Prevoyant::Deplacer(Bestiole & b, Milieu & env) {
     std::vector<Bestiole*> toutesB = env.getBestioles();
 
-    std::vector<bool> bestiolesDetectables = b.detection(env);
+    std::vector<bool> bestiolesDetectables = b.Detection(env);
 
     const double tempsProjection = 5.0;
     const double seuilCollision = 30.0;
 
-    double future_x = b.getPositionX() + std::cos(b.getOrientation()) * b.getVitesse() * tempsProjection;
-    double future_y = b.getPositionY() + std::sin(b.getOrientation()) * b.getVitesse() * tempsProjection;
+    double future_x = b.get_x() + std::cos(b.getOrientation()) * b.getVitesse() * tempsProjection;
+    double future_y = b.get_y() + std::sin(b.getOrientation()) * b.getVitesse() * tempsProjection;
 
     double evasion_x = 0.0, evasion_y = 0.0;
 
@@ -25,8 +25,8 @@ void Prevoyant::deplacer(Bestiole & b, Milieu & env) {
 
         Bestiole* voisin = toutesB[i];
 
-        double voisin_future_x = voisin->getPositionX() + std::cos(voisin->getOrientation()) * voisin->getVitesse() * tempsProjection;
-        double voisin_future_y = voisin->getPositionY() + std::sin(voisin->getOrientation()) * voisin->getVitesse() * tempsProjection;
+        double voisin_future_x = voisin->get_x() + std::cos(voisin->getOrientation()) * voisin->getVitesse() * tempsProjection;
+        double voisin_future_y = voisin->get_y() + std::sin(voisin->getOrientation()) * voisin->getVitesse() * tempsProjection;
 
         double dist_x = future_x - voisin_future_x;
         double dist_y = future_y - voisin_future_y;
