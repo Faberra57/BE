@@ -1,7 +1,7 @@
 #ifndef BESTIOLEFACTORY_H
 #define BESTIOLEFACTORY_H
 
-#include "Bestiole.hpp"
+#include "Bestiole.h"
 #include <map>
 #include <string>
 

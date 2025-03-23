@@ -1,4 +1,4 @@
-#include "BestioleFactory.hpp"
+#include "BestioleFactory.h"
 #include <cstdlib>   // rand()
 #include <iostream>
 
