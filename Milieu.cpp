@@ -6,7 +6,7 @@
 
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
-Milieu::Milieu(int l, int w) : UImg( _width, _height, 1, 3 ),longueur(l), largeur(w) {}
+Milieu::Milieu(int l, int w) : UImg( l, w, 1, 3 ),longueur(w), largeur(l),bestioles(){}
 
 Milieu::~Milieu() {
     for (auto b : bestioles) {
@@ -35,6 +35,6 @@ void Milieu::Step( void )
 
 }
 
-std::vector<Bestiole*> Milieu::getBestioles(){
+std::vector<Bestiole*> Milieu::getBestioles() const{
     return (*this).bestioles;
 }

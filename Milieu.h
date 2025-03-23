@@ -5,6 +5,8 @@
 #include "UImg.h"
 #include "Bestiole.h"
 
+class Bestiole;
+
 class Milieu: public UImg{
 private:
     static const T          white[];
@@ -22,7 +24,7 @@ public:
 
     void AjouterBestiole(Bestiole* b);
     void eliminerBestiole(Bestiole* b);
-    std::vector<Bestiole*> getBestioles();
+    std::vector<Bestiole*> getBestioles() const;
     void Step();
 };
 
