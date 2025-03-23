@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 class Milieu;
 
 class Bestiole {
@@ -38,17 +37,19 @@ private:
     T               * couleur;
 
 public:
+    Bestiole();
     Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect);
+    Bestiole( const Bestiole & b );
     ~Bestiole() = default;
 
     void mort();         
     Bestiole* clonage();  
     void Bouge(int larg_max,int longueur_max);     
     void Percussion(Bestiole* autre);
-    double get_x();
-    double get_y();
-    double getOrientation();
-    double getVitesse();
+    double get_x() const;
+    double get_y() const;
+    double getOrientation() const;
+    double getVitesse() const;
     void setOrientation(double o);
     void setVitesse(double v);
 

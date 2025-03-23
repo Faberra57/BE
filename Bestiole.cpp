@@ -27,6 +27,40 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
         couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
         std::vector<Capteur*> Capteurs(2, nullptr);
       }
+Bestiole::Bestiole( void ){
+
+    id = ++next;
+
+    cout << "const Bestiole (" << id << ") par defaut" << endl;
+
+    position_x = position_y = 0;
+    cumulX = cumulY = 0.;
+    orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
+    vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
+
+    couleur = new T[ 3 ];
+    couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+    couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+    couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
+
+}
+
+Bestiole::Bestiole( const Bestiole & b )
+{
+
+   id = ++next;
+
+   cout << "const Bestiole (" << id << ") par copie" << endl;
+
+   position_x = b.position_x;
+   position_y = b.position_y;
+   cumulX = cumulY = 0.;
+   orientation = b.orientation;
+   vitesse = b.vitesse;
+   couleur = new T[ 3 ];
+   memcpy( couleur, b.couleur, 3*sizeof(T) );
+
+}
 
 void Bestiole::mort() {
     if (age >= age_limite || resistance <= 0) {
@@ -86,16 +120,16 @@ void Bestiole::Percussion(Bestiole* autre) {
     }
 }
 
-double Bestiole::get_x(){
+double Bestiole::get_x() const{
     return (*this).position_x;
 }
-double Bestiole::get_y(){
+double Bestiole::get_y() const{
     return (*this).position_y;
 }
-double Bestiole::getVitesse(){
+double Bestiole::getVitesse() const {
     return (*this).vitesse;
 }
-double Bestiole::getOrientation(){
+double Bestiole::getOrientation() const {
     return (*this).orientation;
 }
 void Bestiole::setOrientation(double o){
@@ -133,7 +167,7 @@ std::vector<bool> Bestiole::Detection(Milieu& monMilieu){
 
     for (Capteur* capt:listeCapteurs){
         if (capt!=nullptr){
-            std::vector<bool> detection = capt->detecter(monMilieu);
+            std::vector<bool> detection = capt->Detecter(monMilieu);
             for (size_t i = 0; i < boolDetection.size(); ++i) {
                 if (!boolDetection[i] && detection[i]) {
                     boolDetection[i] = true;
