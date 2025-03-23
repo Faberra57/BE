@@ -33,10 +33,11 @@ BestioleOreille::BestioleOreille(const Bestiole& bestiole) : owner(bestiole)
 
 std::vector<bool> BestioleOreille::detecter(const Milieu& milieu)
 {
+    std::vector<Bestiole*> bestioleEnv = milieu.getBestioles();
     std::vector<bool> res;
-    for (int i = 0; i < milieu.getNbBestioles(); i++)
+    for (int i = 0; i < milieu.getBestioles().size(); i++)
     {
-        double distance = sqrt(pow(owner.getX() - milieu.getBestiole(i).getX(), 2) + pow(owner.getY()  - milieu.getBestiole(i).getY(), 2));
+        double distance = sqrt(pow(owner.get_x() - (*bestioleEnv[i]).get_x(), 2) + pow(owner.get_y()  - (*bestioleEnv[i]).get_y(), 2));
         if (distance <= delta && (double)rand() / RAND_MAX <= gamma)
         {
             res.push_back(true);

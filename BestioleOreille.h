@@ -9,7 +9,7 @@ class BestioleOreille : public Capteur
 {
     public:
         BestioleOreille(const Bestiole&);
-        std::vector<bool> detecter(const Milieu&) override;
+        std::vector<bool> detecter(const Milieu& monMilieu);
     private:
         const Bestiole& owner;
         double delta;

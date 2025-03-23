@@ -2,12 +2,15 @@
 #define CAPTEUR_
 
 #include "Milieu.h"
+
+class Milieu; 
+
 using namespace std;
 
 class Capteur
 {
     public:
-        virtual std::vector<bool> detecter(const Milieu&) = 0;
+        virtual std::vector<bool> Detecter(Milieu& monMilieu) = 0;
 };
 
 

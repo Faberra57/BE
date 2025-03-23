@@ -33,13 +33,15 @@ BestioleYeux::BestioleYeux(const Bestiole& bestiole) : owner(bestiole)
     gamma = (gamma_max - gamma_min) * ((double)rand() / RAND_MAX) + gamma_min;
 }
 
-std::vector<bool> BestioleYeux::detecter(const Milieu& milieu)
+std::vector<bool> BestioleYeux::Detecter(const Milieu& milieu)
 {
     std::vector<bool> res;
-    for (int i = 0; i < milieu.getNbBestioles(); i++)
+    std::vector<Bestiole*> bestioleEnv = milieu.getBestioles();
+
+    for (int i = 0; i < bestioleEnv.size(); i++)
     {
-        double distance = sqrt(pow(owner.getX() - milieu.getBestiole(i).getX(), 2) + pow(owner.getY()  - milieu.getBestiole(i).getY(), 2));
-        double angle = std::abs(owner.getOrientation() - milieu.getBestiole(i).getOrientation());
+        double distance = sqrt(pow(owner.get_x() - (*bestioleEnv[i]).get_x(), 2) + pow(owner.get_y()  - (*bestioleEnv[i]).get_y(), 2));
+        double angle = std::abs(owner.getOrientation() - (*bestioleEnv[i]).getOrientation());
         if (distance <= delta && angle <= alpha/2 && (double)rand() / RAND_MAX <= gamma) //alpha/2 car on prend la valeur absolue de l'angle entre les deux vecteurs vitesse
         {
             res.push_back(true);
