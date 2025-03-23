@@ -1,7 +1,12 @@
-#include "Milieu.hpp"
+#include "Milieu.h"
+
+#include <cstdlib>
+#include <ctime>
 #include <algorithm>
 
-Milieu::Milieu(int l, int w) : longueur(l), largeur(w) {}
+const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
+
+Milieu::Milieu(int l, int w) : UImg( _width, _height, 1, 3 ),longueur(l), largeur(w) {}
 
 Milieu::~Milieu() {
     for (auto b : bestioles) {
@@ -18,10 +23,18 @@ void Milieu::eliminerBestiole(Bestiole* b) {
     delete b;
 }
 
-void Milieu::Maj() {
-    for (auto b : bestioles) {
-        if (b->clonage() && b->Deplacer()) {
-            
-        }
-    }
+void Milieu::Step( void )
+{
+
+   cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
+   for ( std::vector<Bestiole*>::iterator it = bestioles.begin() ; it != bestioles.end() ; ++it )
+   {
+      (*it)->action(*this);
+      (*it)->draw(*this);
+   }
+
+}
+
+std::vector<Bestiole*> Milieu::getBestioles(){
+    return (*this).bestioles;
 }
