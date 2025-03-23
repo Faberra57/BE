@@ -46,7 +46,7 @@ void Aquarium::run( void )
          if ( is_keyESC() ) close();
       }
 
-      flotte->step();
+      flotte->Step();
       display( *flotte );
 
       wait( delay );
