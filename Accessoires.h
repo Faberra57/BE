@@ -1,13 +1,15 @@
-#ifndef _ACCESS_
-#define _ACCESS_
+#ifndef ACCESSOIRE_H
+#define ACCESSOIRE_H
 
-#include <iostream>
+// Déclaration anticipée de la classe Bestiole (définie ailleurs)
+class Bestiole;
 
-// Interface Accessoire qui déclare uniquement la méthode setParam
-class Accessoires {
+class Accessoire {
 public:
-    virtual ~Accessoires() {}
-    virtual void setParam(float vitesse, float boost_max) = 0;
+    virtual ~Accessoire() {}
+    // Pour BestioleCamouflage, seul le premier paramètre sera utilisé.
+    // Pour BestioleCarapace, le premier représente η et le second ω.
+    virtual void setParam(Bestiole& b, double param1, double param2 = 0.0) = 0;
 };
 
-#endif
+#endif // ACCESSOIRE_H
