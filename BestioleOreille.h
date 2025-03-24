@@ -4,6 +4,7 @@
 #include "Capteur.h"
 #include "Milieu.h"
 #include "Bestiole.h"
+
 using namespace std;
 class BestioleOreille : public Capteur
 {
