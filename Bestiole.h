@@ -32,6 +32,12 @@ private:
     bool estVivant;
     double resistance;
     double detectabilite;
+    bool yeux ;
+    bool oreille ;
+    bool nageoire ;
+    bool carapace ;
+    bool camouflage ;
+
     std::vector<Capteur*> Capteurs; //premier élément : Yeux, deuxième : Oreilles
 
     double            cumulX, cumulY;
@@ -43,7 +49,7 @@ private:
 
 public:
     Bestiole();
-    Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect , int comportement);
+    Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, double res, bool yeux, bool oreille, bool nageoire, bool carapace, bool camouflage , int comportement);
     Bestiole( const Bestiole & b );
     ~Bestiole() = default;
 
