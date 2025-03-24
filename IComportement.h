@@ -6,8 +6,8 @@
 
 class IComportement{
     public : 
-        virtual void Deplacer()=0;
-        virtual ~IComportement(){};
+    virtual void Deplacer(Bestiole & b, Milieu & env) = 0;
+    virtual ~IComportement(){};
 
 };
 #endif
