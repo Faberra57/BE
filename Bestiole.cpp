@@ -26,10 +26,10 @@ int               Bestiole::next = 0;
 
 
 
-Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect, int comportement)
+Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect, bool yeux, bool oreille, bool nageoire, bool carapace, bool camouflage , int comportement)
  : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
       age_limite(a_lim), estVivant(vivant), resistance(res), detectabilite(detect),
-      cumulX(0), cumulY(0)
+      cumulX(0), cumulY(0) , nageoire(nageoire) , carapace(carapace)  , yeux(yeux) , oreille(oreille) , camouflage(camouflage)
 {
     couleur = new T[3];
 

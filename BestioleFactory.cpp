@@ -88,5 +88,5 @@ Bestiole* BestioleFactory::CreerBestiole() {
     int age_limite = rand() % AGE_MAX;
     double resistance = (rand() % RESISTANCE_MAX);
 
-    return new Bestiole(id, vitesse, x, y, orientation, taille, age_limite, resistance,comportement, yeux, oreille, nageoire, carapace, camouflage , comportement);
+    return new Bestiole(id ,vitesse, x, y, orientation, taille, age_limite, resistance, yeux, oreille, nageoire, carapace, camouflage ,comportement);
 }
