@@ -19,7 +19,7 @@ class Bestiole {
     static const double     AFF_SIZE;
     static const double     MAX_VITESSE;
     static const double     LIMITE_VUE;
-    
+
 private:
     int id;
     double vitesse;
@@ -29,7 +29,6 @@ private:
     double taille;
     int age;
     int age_limite;
-    bool estVivant;
     double resistance;
     double detectabilite;
     bool yeux ;

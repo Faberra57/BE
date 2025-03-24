@@ -9,6 +9,12 @@
 #include "Peureuse.h"
 #include "prevoyant.h"
 
+#include "BestioleYeux.h"
+#include "BestioleOreille.h"
+
+#include "BestioleNageoire.h"
+#include "BestioleCamouflage.h"
+#include "BestioleCarapace.h"
 
 #include <cstdlib>
 #include <cmath>
@@ -26,7 +32,7 @@ const double      Bestiole::LIMITE_VUE = 30.;
 
 Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, double res, bool yeux, bool oreille, bool nageoire, bool carapace, bool camouflage , int comportement)
  : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
-      age_limite(a_lim), resistance(res), cumulX(0), cumulY(0) , nageoire(nageoire) , carapace(carapace)  , yeux(yeux) , oreille(oreille) , camouflage(camouflage)
+      age_limite(a_lim), resistance(res), cumulX(0), cumulY(0) , nageoire(nageoire) , carapace(carapace)  , yeux(yeux) , oreille(oreille) , camouflage(camouflage),detectabilite(0), estVivant(true)
 {
     couleur = new T[3];
     detectabilite = 0 ;
@@ -58,12 +64,25 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
         couleur[1] = rand() % 230;
         couleur[2] = rand() % 230;
     }
-
     Capteurs = std::vector<Capteur*>(2, nullptr);  // initialise ton attribut, pas une variable locale
+    if (yeux) {
+        Capteurs.push_back(new BestioleYeux(*this));
+    }
+    if (oreille) {
+        Capteurs.push_back(new BestioleOreille(*this));
+    }
+    if (nageoire) {
+       (new BestioleNageoire(*this))->setParam();
+    }
+    if (carapace) {
+        (new BestioleCarapace(*this))->setParam();
+    }
+    if (camouflage) {
+        (new BestioleCamouflage(*this))->setParam();
+    }
 }
 
-
-
+/*
 Bestiole::Bestiole( void ){
     cout << "const Bestiole (" << id << ") par defaut" << endl;
 
@@ -78,21 +97,36 @@ Bestiole::Bestiole( void ){
     couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
 
 }
+*/
 
+// Constructeur par copie
 Bestiole::Bestiole( const Bestiole & b )
 {
-   cout << "const Bestiole (" << id << ") par copie" << endl;
+    cout << "const Bestiole (" << id << ") par copie" << endl;
+    id = b.id;
+    //position et vitesse
+    position_x = b.position_x;
+    position_y = b.position_y;
+    cumulX = cumulY = 0.;
+    orientation = b.orientation;
+    vitesse = b.vitesse;
+    //états de la bestiole
+    taille = b.taille;
+    resistance = b.resistance;
+    detectabilite = b.detectabilite;
+    age = b.age;
+    estVivant = b.estVivant;
+    //accessoire 
+    nageoire = b.nageoire;
+    carapace = b.carapace;
+    camouflage = b.camouflage;
+    //capteurs
+    Capteurs = b.Capteurs;
+    //comportement
+    icomportement = b.icomportement;
 
-   position_x = b.position_x;
-   position_y = b.position_y;
-   cumulX = cumulY = 0.;
-   orientation = b.orientation;
-   vitesse = b.vitesse;
-   id = b.id;
-   age = b.age;
-   couleur = new T[ 3 ];
-   memcpy( couleur, b.couleur, 3*sizeof(T) );
-
+    couleur = new T[ 3 ];
+    memcpy( couleur, b.couleur, 3*sizeof(T) );
 }
 
 void Bestiole::mort() {
@@ -213,7 +247,7 @@ std::vector<bool> Bestiole::Detection(Milieu& monMilieu){
 
     for (Capteur* capt:listeCapteurs){
         if (capt!=nullptr){
-            std::vector<bool> detection = capt->Detecter(monMilieu);
+            std::vector<bool> detection = capt->detecter(monMilieu);
             for (size_t i = 0; i < boolDetection.size(); ++i) {
                 if (!boolDetection[i] && detection[i]) {
                     boolDetection[i] = true;
