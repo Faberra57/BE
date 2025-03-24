@@ -33,7 +33,7 @@ BestioleYeux::BestioleYeux(const Bestiole& bestiole) : owner(bestiole)
     gamma = (gamma_max - gamma_min) * ((double)rand() / RAND_MAX) + gamma_min;
 }
 
-std::vector<bool> BestioleYeux::Detecter(const Milieu& milieu)
+std::vector<bool> BestioleYeux::detecter(const Milieu& milieu)
 {
     std::vector<bool> res;
     std::vector<Bestiole*> bestioleEnv = milieu.getBestioles();

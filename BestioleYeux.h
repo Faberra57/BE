@@ -1,5 +1,5 @@
-#ifndef BESTIOLEOREILLE_
-#define BESTIOLEOREILLE_
+#ifndef BESTIOLEYEUX_
+#define BESTIOLEYEUX_
 
 #include "Capteur.h"
 #include "Milieu.h"
@@ -10,7 +10,7 @@ class BestioleYeux : public Capteur
 {
     public:
         BestioleYeux(const Bestiole&);
-        std::vector<bool> Detecter(const Milieu& monMilieu);
+        std::vector<bool> detecter(const Milieu& monMilieu);
     private:
         const Bestiole& owner;
         double alpha;
