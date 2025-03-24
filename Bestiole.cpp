@@ -18,15 +18,41 @@ int               Bestiole::next = 0;
 #include <cmath>
 #include <iostream>
 
-Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect)
-    : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
-      age_limite(a_lim), estVivant(vivant), resistance(res), detectabilite(detect), cumulX(0),cumulY(0) {
-        couleur = new T[ 3 ];
-        couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-        couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-        couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-        std::vector<Capteur*> Capteurs(2, nullptr);
-      }
+
+Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect, int comportement)
+ : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
+      age_limite(a_lim), estVivant(vivant), resistance(res), detectabilite(detect),
+      cumulX(0), cumulY(0)
+{
+    couleur = new T[3];
+
+    if (comportement == 0) {  // Grégaire
+        couleur[0] = 0; couleur[1] = 255; couleur[2] = 0;
+    }
+    else if (comportement == 1) {  // Kamikaze
+        couleur[0] = 255; couleur[1] = 0; couleur[2] = 0;
+    }
+
+    else if (comportement == 2) {  // Peureuse
+        couleur[0] = 255; couleur[1] = 255; couleur[2] = 0;
+    }
+    else if (comportement == 3) {  // Prévoyante
+        couleur[0] = 0; couleur[1] = 0; couleur[2] = 255;
+    }
+    else if (comportement == 4) {  // Multiple
+        couleur[0] = 128; couleur[1] = 0; couleur[2] = 128;
+    }
+    else {  // Comportement inconnu → couleur aléatoire
+        couleur[0] = rand() % 230;
+        couleur[1] = rand() % 230;
+        couleur[2] = rand() % 230;
+    }
+
+    Capteurs = std::vector<Capteur*>(2, nullptr);  // initialise ton attribut, pas une variable locale
+}
+
+
+
 Bestiole::Bestiole( void ){
 
     id = ++next;

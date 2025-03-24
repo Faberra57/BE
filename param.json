@@ -4,7 +4,6 @@
     "Y_LIM": 100,
     "AGE_LIM": 100,
     "RESISTANCE_LIM": 50,
-    "DETECT_LIM": 30,
     "TOLERANCE_COLLISION": 0.001,
     "MAX_VITESSE": 10,
     "AFF_SIZE": 8.0,
