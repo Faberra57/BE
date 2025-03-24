@@ -43,6 +43,17 @@
 "Peureuse" : {
     "multiplicateur_vit_peureuse" : 4 , 
     "seuil" : 10  
+},
+"BestioleCamouflage" : {
+    "PSI_min" : 0.1,
+    "PSI_max" : 0.9
+},
+"BestioleCarapace" : {
+    "eta_max" : 10,
+    "omega_max" : 20
+},
+"BestioleNageoire" : {
+    "boost_max" : 10
 }
 
 }
