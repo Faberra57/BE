@@ -10,7 +10,7 @@ class Peureuse : public IComportement {
     public :
         Peureuse();
         ~Peureuse();
-        void Deplacer(Bestiole& Bestiole,Milieu& milieu) override  ;
+        void Deplacer(Bestiole& Bestiole,Milieu& milieu) override final;
 };
 
 #endif

@@ -187,6 +187,10 @@ void Bestiole::setResistance(double res ){
 
 }
 
+void Bestiole::executeComportement(Milieu& monMilieu){
+    icomportement->Deplacer(*this,monMilieu);
+}
+
 void Bestiole::action( Milieu& monMilieu )
 {
 

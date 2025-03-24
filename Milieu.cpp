@@ -23,6 +23,13 @@ void Milieu::eliminerBestiole(Bestiole* b) {
     delete b;
 }
 
+void Milieu::Update( void )
+{
+   for ( std::vector<Bestiole*>::iterator it = bestioles.begin() ; it != bestioles.end() ; ++it )
+   {
+      (*it)->executeComportement(*this);
+   }
+}
 void Milieu::Step( void )
 {
 

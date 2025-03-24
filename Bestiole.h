@@ -67,6 +67,7 @@ public:
     void setVitesse(double v);
     void setDetectabilite(double phi);
     void setResistance(double res);
+    void executeComportement(Milieu& monMilieu);
 
 
     std::vector<bool> Detection(Milieu& monMilieu);

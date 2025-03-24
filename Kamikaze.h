@@ -10,7 +10,7 @@ class Kamikaze : public IComportement {
     public :
         Kamikaze();
         ~Kamikaze();
-        void Deplacer(Bestiole& Bestiole, Milieu& milieu) override;
+        void Deplacer(Bestiole& Bestiole, Milieu& milieu) override final;
 };
 
 #endif

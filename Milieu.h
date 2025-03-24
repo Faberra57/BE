@@ -25,6 +25,7 @@ public:
     void AjouterBestiole(Bestiole* b);
     void eliminerBestiole(Bestiole* b);
     std::vector<Bestiole*> getBestioles() const;
+    void Update();
     void Step();
 };
 
