@@ -1,8 +1,14 @@
 #include "Bestiole.h"
 
+
 #include "Milieu.h"
 
 #include "Capteur.h"
+#include "gregaire.h"
+#include "Kamikaze.h"
+#include "Peureuse.h"
+#include "prevoyant.h"
+
 
 #include <cstdlib>
 #include <cmath>
@@ -19,6 +25,7 @@ int               Bestiole::next = 0;
 #include <iostream>
 
 
+
 Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect, int comportement)
  : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
       age_limite(a_lim), estVivant(vivant), resistance(res), detectabilite(detect),
@@ -28,16 +35,22 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
 
     if (comportement == 0) {  // Grégaire
         couleur[0] = 0; couleur[1] = 255; couleur[2] = 0;
+        icomportement = new Gregaire() ;
     }
     else if (comportement == 1) {  // Kamikaze
         couleur[0] = 255; couleur[1] = 0; couleur[2] = 0;
+        icomportement = new Kamikaze();
     }
 
     else if (comportement == 2) {  // Peureuse
         couleur[0] = 255; couleur[1] = 255; couleur[2] = 0;
+        icomportement = new Peureuse();
+
     }
     else if (comportement == 3) {  // Prévoyante
         couleur[0] = 0; couleur[1] = 0; couleur[2] = 255;
+        icomportement = new Prevoyant() ;
+
     }
     else if (comportement == 4) {  // Multiple
         couleur[0] = 128; couleur[1] = 0; couleur[2] = 128;
@@ -167,6 +180,11 @@ void Bestiole::setVitesse(double v){
 
 void Bestiole::setDetectabilite(double phi){
     (*this).detectabilite = phi;
+}
+
+void Bestiole::setResistance(double res ){
+    (*this).resistance += res;
+
 }
 
 void Bestiole::action( Milieu& monMilieu )

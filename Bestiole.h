@@ -38,7 +38,7 @@ private:
 
     T               * couleur;
 
-    IComportement* comportement;
+    IComportement* icomportement;
 
 
 public:
@@ -58,6 +58,8 @@ public:
     void setOrientation(double o);
     void setVitesse(double v);
     void setDetectabilite(double phi);
+    void setResistance(double res);
+
 
     std::vector<bool> Detection(Milieu& monMilieu);
 
