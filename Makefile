@@ -17,6 +17,10 @@ endif
 # Cibles
 main : main.cpp Aquarium.o Bestiole.o Milieu.o BestioleFactory.o BestioleCamouflage.o BestioleCarapace.o BestioleNageoire.o BestioleOreille.o BestioleYeux.o gregaire.o Kamikaze.o prevoyant.o Peureuse.o
 	$(CC) $(CFLAGS) -o main main.cpp Aquarium.o Bestiole.o Milieu.o BestioleFactory.o BestioleCamouflage.o BestioleCarapace.o BestioleNageoire.o BestioleOreille.o BestioleYeux.o gregaire.o Kamikaze.o prevoyant.o Peureuse.o $(INCLUDES) $(LDFLAGS)
+Bestiole.o : Bestiole.h Milieu.h Capteur.h Bestiole.cpp
+	$(CC) $(CFLAGS) -c Bestiole.cpp $(INCLUDES)
+Milieu.o : Milieu.h Milieu.cpp
+	$(CC) $(CFLAGS) -c Milieu.cpp $(INCLUDES)
 Aquarium.o : Aquarium.h Aquarium.cpp
 	$(CC) $(CFLAGS) -c Aquarium.cpp $(INCLUDES)
 BestioleFactory.o : BestioleFactory.h Bestiole.h BestioleFactory.cpp 
@@ -35,13 +39,9 @@ gregaire.o : IComportement.h Milieu.h Bestiole.h gregaire.h gregaire.cpp
 	$(CC) $(CFLAGS) -c gregaire.cpp $(INCLUDES)
 Kamikaze.o : IComportement.h Milieu.h Bestiole.h Kamikaze.h Kamikaze.cpp
 	$(CC) $(CFLAGS) -c Kamikaze.cpp $(INCLUDES)
-Peureuse.o : IComportement.h Milieu.h Bestiole.h prevoyant.h prevoyant.cpp
+prevoyant.o : IComportement.h Milieu.h Bestiole.h prevoyant.h prevoyant.cpp
 	$(CC) $(CFLAGS) -c prevoyant.cpp $(INCLUDES)
-prevoyant.o : IComportement.h Milieu.h Bestiole.h gregaire.h gregaire.cpp
-	$(CC) $(CFLAGS) -c gregaire.cpp $(INCLUDES)
-Bestiole.o : Bestiole.h Milieu.h Capteur.h Bestiole.cpp
-	$(CC) $(CFLAGS) -c Bestiole.cpp $(INCLUDES)
-Milieu.o : Milieu.h Milieu.cpp
-	$(CC) $(CFLAGS) -c Milieu.cpp $(INCLUDES)
+Peureuse.o : IComportement.h Milieu.h Bestiole.h Peureuse.h Peureuse.cpp
+	$(CC) $(CFLAGS) -c Peureuse.cpp $(INCLUDES)
 clean:
 	rm -rf *.o main

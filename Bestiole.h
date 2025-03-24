@@ -11,6 +11,8 @@
 using namespace std;
 
 class Milieu;
+class Capteur;
+class IComportement;
 
 class Bestiole {
     private :

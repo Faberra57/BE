@@ -8,6 +8,10 @@
 #include <fstream>
 #include "json.hpp"
 
+Kamikaze::Kamikaze(){}
+
+Kamikaze::~Kamikaze(){}
+
 void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
     std::vector<bool> best_detectés = B1.Detection(milieu); 
     std::vector<Bestiole*> best_aq = milieu.getBestioles();
@@ -39,7 +43,8 @@ void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
 
     if (dx != 0 || dy!= 0 ){
         B1.setOrientation(std::atan2(dy,dx) * 180 / M_PI);
-        B1.setVitesse(B1.getVitesse()*j["Kamikaze"]["multiplicateur_vit_kamikaze"]);
+        int multiplicateur = j["Kamikaze"]["multiplicateur_vit_kamikaze"];
+        B1.setVitesse(B1.getVitesse() * multiplicateur);
     }
 }
 
