@@ -6,9 +6,11 @@
 #include "Milieu.h"
 
 
-class Peureuse{
+class Peureuse : public IComportement {
     public :
-        void Deplacer(Bestiole& Bestiole,Milieu& milieu);
+        Peureuse();
+        ~Peureuse();
+        void Deplacer(Bestiole& Bestiole,Milieu& milieu) override  ;
 };
 
 #endif

@@ -6,7 +6,7 @@
 class Prevoyant : public IComportement {
 public:
     Prevoyant();
-    virtual ~Prevoyant();
+    ~Prevoyant();
 
-    void Deplacer(Bestiole & b, Milieu & env);
+    void Deplacer(Bestiole & b, Milieu & env) override ;
 };

@@ -6,7 +6,7 @@
 class Gregaire : public IComportement {
 public:
     Gregaire();
-    virtual ~Gregaire();
+    ~Gregaire();
 
-    void Deplacer(Bestiole & b, Milieu & env);
+    void Deplacer(Bestiole & b, Milieu & env) override;
 };

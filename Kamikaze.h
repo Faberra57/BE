@@ -6,9 +6,11 @@
 #include "Milieu.h"
 
 
-class Kamikaze{
+class Kamikaze : public IComportement {
     public :
-        void Deplacer(Bestiole& Bestiole, Milieu& milieu);
+        Kamikaze();
+        ~Kamikaze();
+        void Deplacer(Bestiole& Bestiole, Milieu& milieu) override;
 };
 
 #endif
