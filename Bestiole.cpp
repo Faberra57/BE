@@ -139,6 +139,10 @@ void Bestiole::setVitesse(double v){
     (*this).vitesse = v;
 }
 
+void Bestiole::setDetectabilite(double phi){
+    (*this).detectabilite = phi;
+}
+
 void Bestiole::action( Milieu& monMilieu )
 {
 

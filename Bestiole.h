@@ -52,6 +52,7 @@ public:
     double getVitesse() const;
     void setOrientation(double o);
     void setVitesse(double v);
+    void setDetectabilite(double phi);
 
     std::vector<bool> Detection(Milieu& monMilieu);
 
