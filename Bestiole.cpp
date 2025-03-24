@@ -19,8 +19,6 @@ const double      Bestiole::AFF_SIZE = 8.;
 const double      Bestiole::MAX_VITESSE = 10.;
 const double      Bestiole::LIMITE_VUE = 30.;
 
-int               Bestiole::next = 0;
-
 #include <cmath>
 #include <iostream>
 
@@ -67,9 +65,6 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
 
 
 Bestiole::Bestiole( void ){
-
-    id = ++next;
-
     cout << "const Bestiole (" << id << ") par defaut" << endl;
 
     position_x = position_y = 0;
@@ -86,9 +81,6 @@ Bestiole::Bestiole( void ){
 
 Bestiole::Bestiole( const Bestiole & b )
 {
-
-   id = ++next;
-
    cout << "const Bestiole (" << id << ") par copie" << endl;
 
    position_x = b.position_x;
@@ -96,6 +88,8 @@ Bestiole::Bestiole( const Bestiole & b )
    cumulX = cumulY = 0.;
    orientation = b.orientation;
    vitesse = b.vitesse;
+   id = b.id;
+   age = b.age;
    couleur = new T[ 3 ];
    memcpy( couleur, b.couleur, 3*sizeof(T) );
 

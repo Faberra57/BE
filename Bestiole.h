@@ -19,9 +19,7 @@ class Bestiole {
     static const double     AFF_SIZE;
     static const double     MAX_VITESSE;
     static const double     LIMITE_VUE;
-
-    static int              next;
-
+    
 private:
     int id;
     double vitesse;
