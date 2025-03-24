@@ -1,4 +1,4 @@
-#include "prevoyant.h"
+#include "Prevoyant.h"
 #include "Bestiole.h"
 #include "Milieu.h"
 #include <vector>
@@ -44,3 +44,7 @@ void Prevoyant::Deplacer(Bestiole & b, Milieu & env) {
     }
 
 }
+
+// const  tempsProjection  : le temps entre chaque itération 
+// const  seuilCollision  : la distance comme seuil de collision 
+
