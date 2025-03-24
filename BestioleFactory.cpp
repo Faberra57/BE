@@ -59,8 +59,7 @@ Bestiole* BestioleFactory::CreerBestiole() {
         return nullptr;
     }
     // Générez un nombre aléatoire entre 0 et RAND_MAX pour les comportements
-    int random_value_comp = static_cast<double>(std::rand()) / RAND_MAX;
-
+    double random_value_comp = static_cast<double>(std::rand()) / RAND_MAX;
     if (random_value_comp < cumulative_prob_1) {
         comportement = 0; // Grégaire
     } else if (random_value_comp < cumulative_prob_2) {
@@ -69,10 +68,12 @@ Bestiole* BestioleFactory::CreerBestiole() {
         comportement = 2; // Peureuse
     } else if (random_value_comp < cumulative_prob_4) {
         comportement = 3; // Prévoyante
-    } else {
+    } 
+    /* //pas encore implementé
+    else {
         comportement = 4; // Multiple
     }
-
+    */
     bool yeux = PROBA_YEUX > static_cast<double>(std::rand()) / RAND_MAX;
     bool oreille = PROBA_OREILLE > static_cast<double>(std::rand()) / RAND_MAX;
     bool nageoire = PROBA_NAGEOIRE > static_cast<double>(std::rand()) / RAND_MAX;
@@ -80,13 +81,13 @@ Bestiole* BestioleFactory::CreerBestiole() {
     bool camouflage = PROBA_CAMOUFLAGE > static_cast<double>(std::rand()) / RAND_MAX;
 
     int id = id_counter++;
-    double vitesse = (rand() % VITESSE_MAX);
+    double vitesse = (rand() % VITESSE_MAX)+0.1; // On ne veut pas de vitesse nulle
     double x = rand() % 100;
     double y = rand() % 100;
     double orientation = (rand() % 360) * 3.14159 / 180;
     double taille = TAILLE;
     int age_limite = rand() % AGE_MAX;
     double resistance = (rand() % RESISTANCE_MAX);
-
+    std::cout << "Création de la bestiole " << id << " avec comportement " << comportement << " et age limite "<< age_limite << std::endl;
     return new Bestiole(id ,vitesse, x, y, orientation, taille, age_limite, resistance, yeux, oreille, nageoire, carapace, camouflage ,comportement);
 }

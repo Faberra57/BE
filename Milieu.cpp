@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
-
+int nb_iterations = 0;
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
 Milieu::Milieu(int l, int w) : UImg( l, w, 1, 3 ),longueur(w), largeur(l),bestioles(){}
@@ -27,19 +27,25 @@ void Milieu::Update( void )
 {
    for ( std::vector<Bestiole*>::iterator it = bestioles.begin() ; it != bestioles.end() ; ++it )
    {
-      (*it)->executeComportement(*this);
+        (*it)->viellir();
+        (*it)->executeComportement(*this);
    }
 }
 void Milieu::Step( void )
 {
-
+    nb_iterations++;
    cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
    for ( std::vector<Bestiole*>::iterator it = bestioles.begin() ; it != bestioles.end() ; ++it )
    {
-      (*it)->action(*this);
-      (*it)->draw(*this);
+        if((*it)->getVivant()){ // Si la bestiole est vivante
+            (*it)->action(*this);
+            (*it)->draw(*this);
+        }
+        else{
+            eliminerBestiole(*it);
+        }
    }
-
+   cout << "Iteration " << nb_iterations << endl;
 }
 
 std::vector<Bestiole*> Milieu::getBestioles() const{

@@ -48,10 +48,8 @@ void Aquarium::run( void )
 
       flotte->Step();
       display( *flotte );
-      flotte->Update();
-
       wait( delay );
-
+      flotte->Update();
    } // while
 
 }

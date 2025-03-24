@@ -48,12 +48,13 @@ private:
 
 
 public:
-    Bestiole();
+    //Bestiole();
     Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, double res, bool yeux, bool oreille, bool nageoire, bool carapace, bool camouflage , int comportement);
     Bestiole( const Bestiole & b );
-    ~Bestiole() = default;
-
-    void mort();         
+    
+    ~Bestiole();
+    bool getVivant() const;
+    void viellir();    
     Bestiole* clonage();  
     void Bouge(int larg_max,int longueur_max);     
     void Percussion(Bestiole* autre);

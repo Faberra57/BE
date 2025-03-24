@@ -35,36 +35,36 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
       age_limite(a_lim), resistance(res), cumulX(0), cumulY(0) , nageoire(nageoire) , carapace(carapace)  , yeux(yeux) , oreille(oreille) , camouflage(camouflage),detectabilite(0), estVivant(true)
 {
     couleur = new T[3];
-    detectabilite = 0 ;
 
     if (comportement == 0) {  // Grégaire
-        couleur[0] = 0; couleur[1] = 255; couleur[2] = 0;
+        couleur[0] = 0; couleur[1] = 255; couleur[2] = 0; // vert
         icomportement = new Gregaire() ;
     }
     else if (comportement == 1) {  // Kamikaze
-        couleur[0] = 255; couleur[1] = 0; couleur[2] = 0;
+        couleur[0] = 255; couleur[1] = 0; couleur[2] = 0; // rouge
         icomportement = new Kamikaze();
     }
 
     else if (comportement == 2) {  // Peureuse
-        couleur[0] = 255; couleur[1] = 255; couleur[2] = 0;
-        icomportement = new Peureuse();
+        couleur[0] = 255; couleur[1] = 255; couleur[2] = 0; // jaune
+        icomportement = new Peureuse(); 
 
     }
     else if (comportement == 3) {  // Prévoyante
-        couleur[0] = 0; couleur[1] = 0; couleur[2] = 255;
+        couleur[0] = 0; couleur[1] = 0; couleur[2] = 255; // bleu
         icomportement = new Prevoyant() ;
 
     }
     else if (comportement == 4) {  // Multiple
-        couleur[0] = 128; couleur[1] = 0; couleur[2] = 128;
+        couleur[0] = 128; couleur[1] = 0; couleur[2] = 128; // violet
+        // icomportement = new Multiple(); Implementer Multiple
     }
     else {  // Comportement inconnu → couleur aléatoire
         couleur[0] = rand() % 230;
         couleur[1] = rand() % 230;
         couleur[2] = rand() % 230;
     }
-    Capteurs = std::vector<Capteur*>(2, nullptr);  // initialise ton attribut, pas une variable locale
+    Capteurs = std::vector<Capteur*>();  // initialise ton attribut, pas une variable locale
     if (yeux) {
         Capteurs.push_back(new BestioleYeux(*this));
     }
@@ -82,22 +82,21 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
     }
 }
 
-/*
-Bestiole::Bestiole( void ){
-    cout << "const Bestiole (" << id << ") par defaut" << endl;
-
-    position_x = position_y = 0;
-    cumulX = cumulY = 0.;
-    orientation = static_cast<double>( rand() )/RAND_MAX*2.*M_PI;
-    vitesse = static_cast<double>( rand() )/RAND_MAX*MAX_VITESSE;
-
-    couleur = new T[ 3 ];
-    couleur[ 0 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-    couleur[ 1 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-    couleur[ 2 ] = static_cast<int>( static_cast<double>( rand() )/RAND_MAX*230. );
-
+// Destructeur
+Bestiole::~Bestiole()
+{
+    cout << "dest Bestiole (" << id << ")" << endl;
+    if (couleur != nullptr) {
+        delete[] couleur;
+    }
+    for (auto capt : Capteurs) {
+        if (capt != nullptr)
+            delete capt;
+    }
+    if (icomportement != nullptr) {
+        delete icomportement;
+    }
 }
-*/
 
 // Constructeur par copie
 Bestiole::Bestiole( const Bestiole & b )
@@ -129,9 +128,17 @@ Bestiole::Bestiole( const Bestiole & b )
     memcpy( couleur, b.couleur, 3*sizeof(T) );
 }
 
-void Bestiole::mort() {
+void Bestiole::viellir() {
+    age++;
+}
+
+bool Bestiole::getVivant() const {
     if (age >= age_limite || resistance <= 0) {
-        estVivant = false;
+        cout << "Bestiole #" << id << " est morte" << endl;
+        return false;
+    }
+    else {
+        return true;
     }
 }
 
@@ -175,7 +182,7 @@ void Bestiole::Bouge( int xLim, int yLim )
 }
 
 void Bestiole::Percussion(Bestiole* autre) {
-    if (std::abs(position_x - autre->position_x) < 1e-3 &
+    if (std::abs(position_x - autre->position_x) < 1e-3 &&
         std::abs(position_y - autre->position_y) < 1e-3) {
 
         std::cout << " Collision détectée entre Bestiole #" << id
