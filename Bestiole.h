@@ -29,6 +29,7 @@ private:
     double taille;
     int age;
     int age_limite;
+    bool estVivant;
     double resistance;
     double detectabilite;
     bool yeux ;
