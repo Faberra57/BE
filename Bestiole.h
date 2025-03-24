@@ -3,6 +3,8 @@
 
 #include "UImg.h"
 #include "Capteur.h"
+#include "IComportement.h"
+
 
 #include <iostream>
 
@@ -15,7 +17,7 @@ class Bestiole {
     static const double     AFF_SIZE;
     static const double     MAX_VITESSE;
     static const double     LIMITE_VUE;
- 
+
     static int              next;
 
 private:
@@ -36,9 +38,12 @@ private:
 
     T               * couleur;
 
+    IComportement* comportement;
+
+
 public:
     Bestiole();
-    Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect);
+    Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, bool vivant, double res, double detect , int comportement);
     Bestiole( const Bestiole & b );
     ~Bestiole() = default;
 
