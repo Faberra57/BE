@@ -31,7 +31,7 @@ void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
         if (best_detectés[i]){
             if ((*best_aq[i]).getId() != B1.getId()){
                 Bestiole* B2 = best_aq[i]; 
-                double tmp = pow((B1.get_x() - (*B2).get_x()),2) + pow((B1.get_y() - (*B2).get_y()),2) ; 
+                double tmp = sqrt(pow((B1.get_x() - (*B2).get_x()),2) + pow((B1.get_y() - (*B2).get_y()),2)) ; 
                 if (tmp<dist_min){
                     dist_min = tmp;
                     position_bestiole_proche = i;
@@ -40,6 +40,10 @@ void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
         }
     }
 
+    if (dist_min == std::numeric_limits<double>::infinity()) {
+        return; // aucune cible détectée
+    }
+    
     double dx = B1.get_x() - (*best_aq[position_bestiole_proche]).get_x();
     double dy = B1.get_y() - (*best_aq[position_bestiole_proche]).get_y();
 
