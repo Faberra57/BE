@@ -30,9 +30,10 @@ void Gregaire::Deplacer(Bestiole & b, Milieu & env) {
     if (count > 0) {
         double moyenne_x = sum_x / count;
         double moyenne_y = sum_y / count;
-
+        
         double nouvelleOrientation = std::atan2(moyenne_y, moyenne_x);
         b.setOrientation(nouvelleOrientation);
+
     }
 
 

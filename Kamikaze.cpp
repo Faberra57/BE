@@ -44,11 +44,11 @@ void Kamikaze::Deplacer(Bestiole& B1,Milieu& milieu){
         return; // aucune cible détectée
     }
     
-    double dx = B1.get_x() - (*best_aq[position_bestiole_proche]).get_x();
-    double dy = B1.get_y() - (*best_aq[position_bestiole_proche]).get_y();
+    double dx = std::cos((*best_aq[position_bestiole_proche]).getOrientation()) * (*best_aq[position_bestiole_proche]).getVitesse();
+    double dy = std::sin((*best_aq[position_bestiole_proche]).getOrientation()) * (*best_aq[position_bestiole_proche]).getVitesse();
 
     if (dx != 0 || dy!= 0 ){
-        B1.setOrientation(std::atan2(dy,dx) * 180 / M_PI);
+        B1.setOrientation(std::atan2(dy,dx));
         int multiplicateur = j["Kamikaze"]["multiplicateur_vit_kamikaze"];
         B1.setVitesse(B1.getVitesse() * multiplicateur);
     }
