@@ -50,11 +50,11 @@
     "PSI_max" : 0.9
 },
 "BestioleCarapace" : {
-    "eta_max" : 10,
-    "omega_max" : 20
+    "eta_max" : 3,
+    "omega_max" : 5
 },
 "BestioleNageoire" : {
-    "boost_max" : 10
+    "boost_max" : 2
 },
 "Prevoyant" : {
     "temps_Projection" : 5.0 , 
