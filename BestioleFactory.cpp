@@ -70,11 +70,9 @@ Bestiole* BestioleFactory::CreerBestiole(int x_lim,int y_lim) {
     } else if (random_value_comp < cumulative_prob_4) {
         comportement = 3; // Prévoyante
     } 
-    /* //pas encore implementé
     else {
         comportement = 4; // Multiple
     }
-    */
     bool yeux = PROBA_YEUX > static_cast<double>(std::rand()) / RAND_MAX;
     bool oreille = PROBA_OREILLE > static_cast<double>(std::rand()) / RAND_MAX;
     bool nageoire = PROBA_NAGEOIRE > static_cast<double>(std::rand()) / RAND_MAX;
