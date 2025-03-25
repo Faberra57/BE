@@ -1,8 +1,11 @@
 #include "Milieu.h"
+#include "BestioleFactory.h"
 
 #include <cstdlib>
 #include <ctime>
 #include <algorithm>
+#include <random>
+
 int nb_iterations = 0;
 const T    Milieu::white[] = { (T)255, (T)255, (T)255 };
 
@@ -37,6 +40,18 @@ void Milieu::Update( void )
 void Milieu::Step( void )
 {
     nb_iterations++;
+    int random = 0;
+    if (nb_iterations%50==0){
+        random = std::rand()%5;
+    }
+    BestioleFactory* factory = new BestioleFactory();
+    if (random>0){
+        for (int k=0;k<=random;k++){
+            Bestiole* ptr_best = factory->CreerBestiole(640,480);
+            (*this).AjouterBestiole(ptr_best);
+        }
+    }
+    delete factory;
    cimg_forXY( *this, x, y ) fillC( x, y, 0, white[0], white[1], white[2] );
    for (auto it = bestioles.begin(); it != bestioles.end();) {
     if ((*it)->getVivant()) {  // Si la bestiole est vivante
