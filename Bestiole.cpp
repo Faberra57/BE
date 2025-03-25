@@ -7,7 +7,7 @@
 #include "gregaire.h"
 #include "Kamikaze.h"
 #include "Peureuse.h"
-#include "prevoyant.h"
+#include "Prevoyant.h"
 
 #include "BestioleYeux.h"
 #include "BestioleOreille.h"
@@ -30,9 +30,11 @@ const double      Bestiole::LIMITE_VUE = 30.;
 
 
 
-Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, double res, bool yeux, bool oreille, bool nageoire, bool carapace, bool camouflage , int comportement)
- : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0),
-      age_limite(a_lim), resistance(res), cumulX(0), cumulY(0) , nageoire(nageoire) , carapace(carapace)  , yeux(yeux) , oreille(oreille) , camouflage(camouflage),detectabilite(0), estVivant(true)
+Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int a_lim, double res, bool yeux, bool oreille, bool nageoire, bool carapace, bool camouflage, int comportement)
+: id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0), 
+age_limite(a_lim), estVivant(true), resistance(res), detectabilite(0), 
+yeux(yeux), oreille(oreille), nageoire(nageoire), carapace(carapace), camouflage(camouflage),
+Capteurs(),cumulX(0), cumulY(0), couleur(new T[3]), icomportement(nullptr)
 {
     couleur = new T[3];
 
@@ -65,19 +67,19 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
         couleur[2] = rand() % 230;
     }
     Capteurs = std::vector<Capteur*>();  // initialise ton attribut, pas une variable locale
-    if (yeux) {
+    if (Bestiole::yeux) {
         Capteurs.push_back(new BestioleYeux(*this));
     }
-    if (oreille) {
+    if (Bestiole::oreille) {
         Capteurs.push_back(new BestioleOreille(*this));
     }
-    if (nageoire) {
+    if (Bestiole::nageoire) {
        (new BestioleNageoire(*this))->setParam();
     }
-    if (carapace) {
+    if (Bestiole::carapace) {
         (new BestioleCarapace(*this))->setParam();
     }
-    if (camouflage) {
+    if (Bestiole::camouflage) {
         (new BestioleCamouflage(*this))->setParam();
     }
 }

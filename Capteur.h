@@ -10,6 +10,7 @@ using namespace std;
 class Capteur
 {
     public:
+        virtual ~Capteur() {}
         virtual std::vector<bool> detecter(const Milieu& monMilieu) = 0;
 };
 

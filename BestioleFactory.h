@@ -24,7 +24,6 @@ private:
     int VITESSE_MAX;
     int AGE_MAX;
     double TAILLE;
-    int DETECTABILITE_MAX;
 
 public:
     BestioleFactory();  

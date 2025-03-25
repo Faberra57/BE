@@ -9,8 +9,9 @@ using namespace std;
 class BestioleYeux : public Capteur
 {
     public:
+        ~BestioleYeux() override = default; 
         BestioleYeux(const Bestiole&);
-        std::vector<bool> detecter(const Milieu& monMilieu);
+        std::vector<bool> detecter(const Milieu& monMilieu) override;
     private:
         const Bestiole& owner;
         double alpha;
