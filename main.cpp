@@ -12,7 +12,7 @@ using namespace std;
 
 int main()
 {
-   int nbBestioles = 20;
+   int nbBestioles = 30;
    Aquarium       ecosysteme( 640, 480, 30 );
    BestioleFactory* factory = new BestioleFactory();
    for ( int i = 1; i <= nbBestioles; ++i ){
