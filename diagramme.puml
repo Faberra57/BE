@@ -6,23 +6,39 @@ class BestioleFactory {
 }
 
 class Bestiole {
-    + id : int
-    + vitesse : double
-    + x : double
-    + y : double
-    + orientation : double
-    + taille : double
-    + age : int
-    + age_limite : int
-    + estVivant : bool
-    + resistance : double
-    + detectabilité : double
-    + mort(condition)
-    + clonage()
-    + Percussion()
-    + Detection(Milieu)
-    + Bouge()
-    + Action(Milieu)
+  - static const double AFF_SIZE
+  - static const double MAX_VITESSE
+  - static const double LIMITE_VUE
+  - int id
+  - double vitesse
+  - double position_x
+  - double position_y
+  - double orientation
+  - double taille
+  - int age
+  - int age_limite
+  - bool estVivant
+  - double resistance
+  - double detectabilite
+  - bool yeux
+  - bool oreille
+  - bool nageoire
+  - bool carapace
+  - bool camouflage
+  - std::vector<Capteur*> Capteurs
+  - double cumulX
+  - double cumulY
+  - T* couleur
+  - IComportement* icomportement
+
+  + void viellir()
+  + Bestiole* clonage()
+  + void Bouge(larg_max,longueur_max)
+  + void Percussion(Bestiole)
+  + void executeComportement(Milieu)
+  + std::vector<bool> Detection(Milieu)
+  + void action(Milieu)
+  + void draw(UImg)
 }
 
 class Millieu {
@@ -37,7 +53,7 @@ class BestioleOreille {
     - owner : Bestiole
     - delta : float
     - gamme : float
-    + Detecter(Millieu) : Vector<Bool> 
+    + detecter(Millieu) 
 
 }
 
@@ -46,63 +62,72 @@ Interface Accessoire {
 }
 
 Interface Capteur {
-  Detecter(Millieu) : vector<Bool>
+  detecter(Millieu) : vector<Bool>
 }
 
 
 class BestioleNageoire {
-    - owner : Bestiole  
-    - boost : float
-    + setParam() : void #setVit
+  - double boost
+  - Bestiole& Owner
+
+  + BestioleNageoire(Bestiole)
+  + void setParam()
 }
 
 class BestioleCamouflage {
-  - owner : Bestiole
-  - phi: double
-  + setParam() : void #setDetect
+  - Bestiole& Owner
+  - double phi
+
+  + BestioleCamouflage(Bestiole)
+  + void setParam()
 }
 
 class BestioleCarapace {
-  - owner : Bestiole
-  - eta : double
-  - omega : double
-  + setParam() : void #setResist
+  - Bestiole& Owner
+  - double eta
+  - double omega
+
+  + BestioleCarapace(Bestiole)
+  + void setParam()
 }
+
 
 class BestioleYeux {
-  - owner : Bestiole
-  - alpha : Float
-  - delta : Float
-  - gamma : float
-  + Detecter(Millieu) : Vector<Bool>
+  - const Bestiole& owner
+  - double alpha
+  - double delta
+  - double gamma
+
+  + BestioleYeux(Bestiole)
+  + std::vector<bool> detecter(Milieu)
 }
 
-class IComportement {
-  + Deplacer(Bestiole)
+interface IComportement {
+  + Deplacer(Bestiole, Milieu)
 }
 
 class Grégaire {
-    -Deplacer(Bestiole) : void #ajustDirection
+    -Deplacer(Bestiole) 
 
 }
 
 class Peureuse{
-    -Deplacer(Bestiole) : void #def seuil+fuir
+    -Deplacer(Bestiole) 
 
 }
 
 class Kamikaze{
-    -Deplacer(Bestiole) : void #percuterKamikaze
+    -Deplacer(Bestiole) 
 }
 
-class Prévoyant{
-    -Deplacer(Bestiole) : void #ajuster trajectoire
+class Prevoyant{
+    -Deplacer(Bestiole) 
 
 }
 
 
 class Multi{
-    -adoptComportement(Bestiole) : void ?
+    -Deplacer(Bestiole) 
 }
 
 BestioleFactory --> Bestiole : créer
