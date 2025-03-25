@@ -29,13 +29,17 @@ void Peureuse::Deplacer(Bestiole& B1,Milieu& milieu){
     double Fy = 0;
     for (std::size_t i = 0; i< best_detectés.size();i++){
         if (best_detectés[i]){
-            nb_bestiole_proches++;
-            Fx = Fx + (B1.get_x() - (*best_aq[i]).get_x());
-            Fy = Fy + (B1.get_y() - (*best_aq[i]).get_y());
+            if ((*best_aq[i]).getId()!=B1.getId()){
+                nb_bestiole_proches++;
+                Fx = Fx + (B1.get_x() - (*best_aq[i]).get_x());
+                Fy = Fy + (B1.get_y() - (*best_aq[i]).get_y());
+            }
         }
     }
-    Fx = Fx / nb_bestiole_proches;
-    Fy = Fy / nb_bestiole_proches;
+    if (nb_bestiole_proches>0){
+        Fx = Fx / nb_bestiole_proches;
+        Fy = Fy / nb_bestiole_proches;
+    }
     if (nb_bestiole_proches>seuil){
         if (Fx != 0 || Fy!= 0 ){
             B1.setOrientation(std::atan2(Fy,Fx) * 180 / M_PI + 180);

@@ -7,7 +7,7 @@
 #include "gregaire.h"
 #include "Kamikaze.h"
 #include "Peureuse.h"
-#include "Prevoyant.h"
+#include "prevoyant.h"
 
 #include "BestioleYeux.h"
 #include "BestioleOreille.h"
@@ -222,7 +222,10 @@ void Bestiole::setDetectabilite(double phi){
 
 void Bestiole::setResistance(double res ){
     (*this).resistance += res;
+}
 
+int Bestiole::getId(){
+    return (*this).id;
 }
 
 void Bestiole::executeComportement(Milieu& monMilieu){
