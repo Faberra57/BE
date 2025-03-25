@@ -19,9 +19,9 @@ main : main.cpp Aquarium.o Bestiole.o Milieu.o BestioleFactory.o BestioleCamoufl
 	$(CC) $(CFLAGS) -o main main.cpp Aquarium.o Bestiole.o Milieu.o BestioleFactory.o BestioleCamouflage.o BestioleCarapace.o BestioleNageoire.o BestioleOreille.o BestioleYeux.o gregaire.o Kamikaze.o prevoyant.o Peureuse.o Multiple.o $(INCLUDES) $(LDFLAGS)
 Bestiole.o : Bestiole.h Milieu.h Capteur.h Bestiole.cpp 
 	$(CC) $(CFLAGS) -c Bestiole.cpp $(INCLUDES)
-Milieu.o : Milieu.h Milieu.cpp
+Milieu.o : Milieu.h BestioleFactory.h Milieu.cpp
 	$(CC) $(CFLAGS) -c Milieu.cpp $(INCLUDES)
-Aquarium.o : Aquarium.h Aquarium.cpp
+Aquarium.o : Aquarium.h BestioleFactory.h Aquarium.cpp
 	$(CC) $(CFLAGS) -c Aquarium.cpp $(INCLUDES)
 BestioleFactory.o : BestioleFactory.h Bestiole.h BestioleFactory.cpp 
 	$(CC) $(CFLAGS) -c BestioleFactory.cpp $(INCLUDES)

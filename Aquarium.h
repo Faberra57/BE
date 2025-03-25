@@ -10,6 +10,7 @@ using namespace cimg_library;
 
 
 class Milieu;
+class BestioleFactory;
 
 
 class Aquarium : public CImgDisplay
@@ -26,7 +27,7 @@ public :
 
    Milieu & getMilieu( void ) { return *flotte; }
 
-   void run( void );
+   void run(BestioleFactory* factory);
 
 };
 

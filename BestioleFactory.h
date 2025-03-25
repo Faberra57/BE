@@ -27,7 +27,7 @@ private:
 
 public:
     BestioleFactory();  
-    ~BestioleFactory() = default;
+    ~BestioleFactory();
     
     Bestiole* CreerBestiole(int x_lim,int y_lim);  // Crée une nouvelle bestiole
 };

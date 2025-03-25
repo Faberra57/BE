@@ -1,5 +1,5 @@
 #include "Aquarium.h"
-
+#include "BestioleFactory.h"
 #include "Milieu.h"
 
 
@@ -30,7 +30,7 @@ Aquarium::~Aquarium( void )
 }
 
 
-void Aquarium::run( void )
+void Aquarium::run(BestioleFactory* Factory)
 {
 
    cout << "running Aquarium" << endl;
@@ -46,7 +46,7 @@ void Aquarium::run( void )
          if ( is_keyESC() ) close();
       }
 
-      flotte->Step();
+      flotte->Step(Factory);
       flotte->percussionBestiole();
       display( *flotte );
       wait( delay );

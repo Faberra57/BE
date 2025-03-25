@@ -40,6 +40,11 @@ BestioleFactory::BestioleFactory() {
     TAILLE = j["Simulation"]["TAILLE"];
     RESISTANCE_MAX = j["Simulation"]["RESISTANCE_MAX"];
     REDUCTION_RESISTANCE = j["Simulation"]["REDUCTION_RESISTANCE"];
+    std::cout<<"Factory crée"<<std::endl;
+}
+
+BestioleFactory::~BestioleFactory(){
+    std::cout<<"Factory supprimé"<<std::endl;
 }
 
 

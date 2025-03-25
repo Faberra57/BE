@@ -6,6 +6,7 @@
 #include "Bestiole.h"
 
 class Bestiole;
+class BestioleFactory;
 
 class Milieu: public UImg{
 private:
@@ -26,7 +27,7 @@ public:
     void eliminerBestiole(Bestiole* b);
     std::vector<Bestiole*> getBestioles() const;
     void Update();
-    void Step();
+    void Step(BestioleFactory* factory);
     int nbBestioles() const;
     void percussionBestiole();
 };
