@@ -43,7 +43,7 @@
 },
 "Peureuse" : {
     "multiplicateur_vit_peureuse" : 1.2 , 
-    "seuil" : 5
+    "seuil" : 8  
 },
 "BestioleCamouflage" : {
     "PSI_min" : 0.1,
@@ -55,6 +55,10 @@
 },
 "BestioleNageoire" : {
     "boost_max" : 10
+},
+"Prevoyant" : {
+    "temps_Projection" : 5.0 , 
+    "seuil_Collision" : 30.0
 }
 
 }
