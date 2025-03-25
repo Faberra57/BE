@@ -49,7 +49,15 @@ void Milieu::Step( void )
         // Ne pas incrémenter it car l'élément suivant a maintenant pris la place de l'élément supprimé
     }
 }
-   cout << "Iteration " << nb_iterations << endl;
+}
+
+void Milieu::percussionBestiole()
+{
+    for (auto it = bestioles.begin(); it != bestioles.end(); ++it) {
+        for (auto it2 = it + 1; it2 != bestioles.end(); ++it2) {
+                (*it)->Percussion(*it2);
+            }
+        }
 }
 
 std::vector<Bestiole*> Milieu::getBestioles() const{

@@ -7,7 +7,7 @@
 #include "gregaire.h"
 #include "Kamikaze.h"
 #include "Peureuse.h"
-#include "prevoyant.h"
+#include "Prevoyant.h"
 
 #include "BestioleYeux.h"
 #include "BestioleOreille.h"
@@ -185,8 +185,8 @@ void Bestiole::Bouge( int xLim, int yLim )
 }
 
 void Bestiole::Percussion(Bestiole* autre) {
-    if (std::abs(position_x - autre->position_x) < 1e-3 &&
-        std::abs(position_y - autre->position_y) < 1e-3) {
+    if (std::abs(position_x - autre->position_x) < 1e-1 &&
+        std::abs(position_y - autre->position_y) < 1e-1) {
 
         std::cout << " Collision détectée entre Bestiole #" << id
                   << " et Bestiole " << autre->id << std::endl;
