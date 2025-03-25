@@ -136,8 +136,12 @@ void Bestiole::viellir() {
 }
 
 bool Bestiole::getVivant() const {
-    if (age >= age_limite || resistance <= 0) {
-        cout << "Bestiole #" << id << " est morte" << endl;
+    if (age >= age_limite ) {
+        cout << "Bestiole #" << id << " est morte par âge" << endl;
+        return false;
+    }
+    else if (resistance <= 0) {
+        cout << "Bestiole #" << id << " est morte par collision" << endl;
         return false;
     }
     else {
@@ -185,8 +189,8 @@ void Bestiole::Bouge( int xLim, int yLim )
 }
 
 void Bestiole::Percussion(Bestiole* autre) {
-    if (std::abs(position_x - autre->position_x) < 1e-1 &&
-        std::abs(position_y - autre->position_y) < 1e-1) {
+    if (std::abs(position_x - autre->position_x) < 1 &&
+        std::abs(position_y - autre->position_y) < 1) {
 
         std::cout << " Collision détectée entre Bestiole #" << id
                   << " et Bestiole " << autre->id << std::endl;

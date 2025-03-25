@@ -13,6 +13,8 @@ delta_min et delta_max et gamma_min et gamma_max.
 
 */
 
+class Bestiole;
+
 BestioleOreille::BestioleOreille(const Bestiole& bestiole) : owner(bestiole)
 {
     std::ifstream inputFile("param.json");

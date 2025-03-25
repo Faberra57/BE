@@ -47,6 +47,7 @@ void Aquarium::run( void )
       }
 
       flotte->Step();
+      flotte->percussionBestiole();
       display( *flotte );
       wait( delay );
       flotte->Update();
