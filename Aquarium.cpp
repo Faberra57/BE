@@ -35,7 +35,7 @@ void Aquarium::run( void )
 
    cout << "running Aquarium" << endl;
 
-   while ( ! is_closed() )
+   while ( ! is_closed() && flotte->nbBestioles() > 0 )
    {
 
       // cout << "iteration de la simulation" << endl;

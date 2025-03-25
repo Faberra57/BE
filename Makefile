@@ -3,7 +3,7 @@ OS := $(shell uname -s)
 
 # Compilation
 CC = g++
-CFLAGS = -Wall -std=c++11
+CFLAGS = -Wall -std=c++14
 LDFLAGS = -lX11 -lpthread
 INCLUDES = -I .
 

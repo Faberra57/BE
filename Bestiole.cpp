@@ -36,8 +36,6 @@ age_limite(a_lim), estVivant(true), resistance(res), detectabilite(0),
 yeux(yeux), oreille(oreille), nageoire(nageoire), carapace(carapace), camouflage(camouflage),
 Capteurs(),cumulX(0), cumulY(0), couleur(new T[3]), icomportement(nullptr)
 {
-    couleur = new T[3];
-
     if (comportement == 0) {  // Grégaire
         couleur[0] = 0; couleur[1] = 255; couleur[2] = 0; // vert
         icomportement = new Gregaire() ;
@@ -73,14 +71,17 @@ Capteurs(),cumulX(0), cumulY(0), couleur(new T[3]), icomportement(nullptr)
     if (Bestiole::oreille) {
         Capteurs.push_back(new BestioleOreille(*this));
     }
-    if (Bestiole::nageoire) {
-       (new BestioleNageoire(*this))->setParam();
+    if (nageoire) {
+        BestioleNageoire tempNageoire(*this);  // Objet temporaire
+        tempNageoire.setParam();  
     }
-    if (Bestiole::carapace) {
-        (new BestioleCarapace(*this))->setParam();
+    if (carapace) {
+        BestioleCarapace tempCarapace(*this);  // Objet temporaire
+        tempCarapace.setParam(); 
     }
-    if (Bestiole::camouflage) {
-        (new BestioleCamouflage(*this))->setParam();
+    if (camouflage) {
+        BestioleCamouflage tempCamouflage(*this);  // Objet temporaire
+        tempCamouflage.setParam();  
     }
 }
 

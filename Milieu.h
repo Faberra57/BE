@@ -27,6 +27,7 @@ public:
     std::vector<Bestiole*> getBestioles() const;
     void Update();
     void Step();
+    int nbBestioles() const;
 };
 
 #endif // 
