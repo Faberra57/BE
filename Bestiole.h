@@ -66,6 +66,7 @@ public:
     void setVitesse(double v);
     void setDetectabilite(double phi);
     void setResistance(double res);
+    int getId();
     void executeComportement(Milieu& monMilieu);
 
 
