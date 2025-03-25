@@ -44,7 +44,7 @@ BestioleFactory::BestioleFactory() {
 
 
 
-Bestiole* BestioleFactory::CreerBestiole() {
+Bestiole* BestioleFactory::CreerBestiole(int x_lim,int y_lim) {
     
     int comportement = 0; // 0: grégaire, 1: kamikaze, 2: peureuse, 3: prévoyante, 4: multiple
 
@@ -83,8 +83,8 @@ Bestiole* BestioleFactory::CreerBestiole() {
 
     int id = id_counter++;
     double vitesse = (rand() % VITESSE_MAX)+0.3; // On ne veut pas de vitesse nulle
-    double x = rand() % 100;
-    double y = rand() % 100;
+    double x = rand() % x_lim;
+    double y = rand() % y_lim;
     double orientation = (rand() % 360) * 3.14159 / 180;
     double taille = TAILLE;
     int age_limite = rand() % AGE_MAX;

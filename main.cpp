@@ -19,7 +19,7 @@ int main()
    Aquarium       ecosysteme( 640, 480, 30 );
    BestioleFactory* factory = new BestioleFactory();
    for ( int i = 1; i <= nbBestioles; ++i ){
-      Bestiole* ptr_best = factory->CreerBestiole();
+      Bestiole* ptr_best = factory->CreerBestiole(640,480);
       ecosysteme.getMilieu().AjouterBestiole(ptr_best);
    }
    ecosysteme.run();
