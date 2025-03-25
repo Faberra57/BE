@@ -28,6 +28,7 @@ public:
     void Update();
     void Step();
     int nbBestioles() const;
+    void percussionBestiole();
 };
 
 #endif // 
