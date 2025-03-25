@@ -35,7 +35,7 @@ Bestiole::Bestiole(int id, double v, double x, double y, double o, double t, int
 : id(id), vitesse(v), position_x(x), position_y(y), orientation(o), taille(t), age(0), 
 age_limite(a_lim), estVivant(true), resistance(res), detectabilite(0), 
 yeux(yeux), oreille(oreille), nageoire(nageoire), carapace(carapace), camouflage(camouflage),
-Capteurs(),cumulX(0), cumulY(0), couleur(new T[3]), icomportement(nullptr)
+Capteurs(),cumulX(0), cumulY(0), couleur(new T[3]), icomportement(nullptr),num_comportement(comportement)
 {
     if (comportement == 0) {  // Grégaire
         couleur[0] = 0; couleur[1] = 255; couleur[2] = 0; // vert
@@ -127,6 +127,7 @@ Bestiole::Bestiole( const Bestiole & b )
     Capteurs = b.Capteurs;
     //comportement
     icomportement = b.icomportement;
+    num_comportement = b.num_comportement;
 
     couleur = new T[ 3 ];
     memcpy( couleur, b.couleur, 3*sizeof(T) );
@@ -235,6 +236,10 @@ int Bestiole::getId(){
 
 void Bestiole::executeComportement(Milieu& monMilieu){
     icomportement->Deplacer(*this,monMilieu);
+}
+
+int Bestiole::get_num_comportement(){
+    return (*this).num_comportement;
 }
 
 void Bestiole::action( Milieu& monMilieu )

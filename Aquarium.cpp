@@ -52,5 +52,6 @@ void Aquarium::run(BestioleFactory* Factory)
       wait( delay );
       flotte->Update();
    } // while
-
+   std::cout<<"nombre bestioles gregaire : "<<flotte->nbrBestiolesGregaires<<std::endl;
+   std::cout<<"nombre bestioles gregaires mortes : "<<flotte->nbrBestiolesGregairesMortes<<std::endl;
 }

@@ -30,6 +30,8 @@ public:
     void Step(BestioleFactory* factory);
     int nbBestioles() const;
     void percussionBestiole();
+    int nbrBestiolesGregaires;
+    int nbrBestiolesGregairesMortes;
 };
 
 #endif // 

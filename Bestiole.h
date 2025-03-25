@@ -45,6 +45,7 @@ private:
     T               * couleur;
 
     IComportement* icomportement;
+    int num_comportement;
 
 
 public:
@@ -68,6 +69,7 @@ public:
     void setResistance(double res);
     int getId();
     void executeComportement(Milieu& monMilieu);
+    int get_num_comportement();
 
 
     std::vector<bool> Detection(Milieu& monMilieu);
