@@ -8,6 +8,7 @@
 #include "Kamikaze.h"
 #include "Peureuse.h"
 #include "prevoyant.h"
+#include "Multiple.h"
 
 #include "BestioleYeux.h"
 #include "BestioleOreille.h"
@@ -57,7 +58,7 @@ Capteurs(),cumulX(0), cumulY(0), couleur(new T[3]), icomportement(nullptr)
     }
     else if (comportement == 4) {  // Multiple
         couleur[0] = 128; couleur[1] = 0; couleur[2] = 128; // violet
-        // icomportement = new Multiple(); Implementer Multiple
+        icomportement = new Multiple();
     }
     else {  // Comportement inconnu → couleur aléatoire
         couleur[0] = rand() % 230;
