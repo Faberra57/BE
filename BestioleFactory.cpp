@@ -4,6 +4,7 @@
 using json = nlohmann::json;
 
 #include <cstdlib>   // rand()
+#include <ctime> // pour std::time
 #include <iostream>
 #include <random>
 
