@@ -42,7 +42,7 @@ void Peureuse::Deplacer(Bestiole& B1,Milieu& milieu){
     }
     if (nb_bestiole_proches>seuil){
         if (Fx != 0 || Fy!= 0 ){
-            B1.setOrientation(std::atan2(Fy,Fx) * 180 / M_PI + 180);
+            B1.setOrientation(std::atan2(Fx,Fy));
             int multiplicateur = j["Peureuse"]["multiplicateur_vit_peureuse"];
             B1.setVitesse(B1.getVitesse() * multiplicateur); 
     }
