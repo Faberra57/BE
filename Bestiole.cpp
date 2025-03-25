@@ -7,7 +7,7 @@
 #include "gregaire.h"
 #include "Kamikaze.h"
 #include "Peureuse.h"
-#include "Prevoyant.h"
+#include "prevoyant.h"
 
 #include "BestioleYeux.h"
 #include "BestioleOreille.h"

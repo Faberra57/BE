@@ -82,7 +82,7 @@ Bestiole* BestioleFactory::CreerBestiole() {
     bool camouflage = PROBA_CAMOUFLAGE > static_cast<double>(std::rand()) / RAND_MAX;
 
     int id = id_counter++;
-    double vitesse = (rand() % VITESSE_MAX)+0.1; // On ne veut pas de vitesse nulle
+    double vitesse = (rand() % VITESSE_MAX)+0.3; // On ne veut pas de vitesse nulle
     double x = rand() % 100;
     double y = rand() % 100;
     double orientation = (rand() % 360) * 3.14159 / 180;
