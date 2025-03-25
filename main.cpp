@@ -25,6 +25,7 @@ int main()
    ecosysteme.run();
 
 
+   delete factory;
    return 0;
 
 }
